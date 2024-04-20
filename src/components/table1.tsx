@@ -97,7 +97,7 @@ export default function DataTable() {
   return (
     <Stack sx={{ height:'700', width: '80%', overflow: 'hidden' ,margin:'20px', ml:'8em'}}>
       <TableContainer sx={{ overflow: 'hidden'}} >
-        <Table sx={{border:'1px solid #9a9c9b'}}>
+        <Table stickyHeader sx={{border:'1px solid #9a9c9b'}}>
           <TableHead>
             <TableRow sx={{ fontWeight: 'bold',}}>
               {columns.map((column, index) => (

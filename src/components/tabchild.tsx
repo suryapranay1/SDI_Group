@@ -18,12 +18,12 @@ export default function ButtonAppBar() {
         <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
             <InputFileUpload/>
           <Input placeholder="search" variant="outlined" color="success" startDecorator={<SearchIcon/>} sx={{width:'.3',color:"green",ml:'8em',mr:'16em',flexGrow:'0.8',}} />
-          <div>
+          <Box>
             <AppsMenu/>
-          </div>
-          <div>
+          </Box>
+          <Box>
           <MenuIconSideNavExample/>
-          </div>
+          </Box>
 
         </Toolbar>
       </AppBar>

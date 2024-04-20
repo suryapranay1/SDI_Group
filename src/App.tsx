@@ -7,6 +7,7 @@ import ButtonAppBar from './components/tabchild';
 import TabsSegmentedControls from './components/tab';
 import DataTable from './components/table1';
 import DataList from './components/cards';
+import BasicGrid from './components/grid';
 
 function App() {
   return (
@@ -16,31 +17,14 @@ function App() {
         <ButtonAppBar />
 
         <Routes>
-          <Route path="/" element={<FiltersAndData />}>
+          <Route path="/" element={<BasicGrid />}>
             <Route path="/list" element={<DataTable />} />
             <Route path="" element={<DataList />} />
           </Route>
         </Routes>
       </>
     </Router>
-  );
-}
 
-function FiltersAndData() {
-  return (
-    <div style={{ display: 'flex', height: '100vh', fontFamily: 'roboto' }}>
-      <div style={{ width: '15vw' }}>
-        <div>
-          <h2>Filters</h2>
-        </div>
-        <div>
-          <AccordionIndicator number='First' name='User Type' labels={['Super Admin', 'Admin', 'User']} />
-          <AccordionIndicator number='second' name='Roles' labels={['Role1', 'Role2', 'Role3']} />
-          <AccordionIndicator number='third' name='Recent Logins' labels={['Login1', 'Login2', 'Login3']} />
-        </div>
-      </div>
-      <div style={{ flexGrow: '1' }}><Outlet /></div>
-    </div>
   );
 }
 
