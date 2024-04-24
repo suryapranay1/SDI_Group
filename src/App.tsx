@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import AccordionIndicator from './components/filter';
@@ -8,8 +8,11 @@ import TabsSegmentedControls from './components/tab';
 import DataTable from './components/table1';
 import DataList from './components/cards';
 import BasicGrid from './components/grid';
+import AccordionItemComponent from './components/mapaccord';
+import CheckboxList from './components/checkbox';
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <Router>
       <>
@@ -22,9 +25,12 @@ function App() {
             <Route path="" element={<DataList />} />
           </Route>
         </Routes>
-      </>
-    </Router>
 
+
+    <AccordionItemComponent sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    {/* <CheckboxList/> */}
+    </>
+    </Router>
   );
 }
 
