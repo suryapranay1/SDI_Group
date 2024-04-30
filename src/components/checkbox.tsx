@@ -32,19 +32,19 @@ const CheckboxList = () => {
         return energy;
       case "Nature Conservation":
         return natureconversation;
-      case "Environmental measurements(ground,water)":
+      case "Environmental measurements(ground-water)":
         return environmentalwater;
-      case "Environmental measurements(air,noise,nuclear)":
+      case "Environmental measurements(air-noise-nuclear)":
         return environmentalair;
       case "Population":
         return SocietyAndHealth;
       case "Hospital and care":
         return hospitalCare;
-      case "Environmental-measurements(ground,water)":
+      case "Environmental-measurements(ground and water)":
         return environmentGround;
       case "Arable-and-Forest-Soil":
         return AgricultureAndForesty;
-      case "Maps(topography,terrain,altitude)":
+      case "Maps(topography-terrain-altitude)":
         return maps;
       case "Satellite images":
         return satelliteImages;
@@ -228,12 +228,18 @@ const CheckboxList = () => {
         size="sm"
         sx={{}}
       >
-      <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement},${secondelement},${lastElement}`})}}>
+      <ListItemButton onClick={()=>{navigate("/",{state:` , , `})}}>
           <Typography>Home</Typography>
           </ListItemButton>
-        <Typography>{firstelement}</Typography>
-        <Typography>{secondelement}</Typography>
-        <Typography>{lastElement}</Typography>
+          <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement}, ,`})}}>
+            <Typography>{firstelement}</Typography>
+            </ListItemButton>
+          <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement},${secondelement}, `})}}>
+            <Typography>{secondelement}</Typography>
+          </ListItemButton>
+
+
+        <Typography sx={{fontWeight:'bold'}}>{lastElement}</Typography>
       </Breadcrumbs>
       {getSelectedArray().map((item) => (
         <Grid key={item.key} sx={{ ml: 2 }}>

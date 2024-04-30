@@ -64,12 +64,12 @@ const LandingAccord = ({
   const secondelement = selectedArray?.slice(1)[0];
   const lastElement = selectedArray?.slice(-1)[0];
   console.log(selectedArray);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-  const handleAccordionClick = (key1: string, key2: string, key3: string) => {
-    const newSelectedKeys = [];
-    newSelectedKeys.push(key1, key2, key3);
-    setSelectedKeys(newSelectedKeys);
-  };
+  const setExpanded=(key:string)=>{
+    if(key===firstelement || key===secondelement)
+      {
+        return true;
+      }
+  }
   const getSelectedArray = (
     currentArrayKey: string
   ): { key: string; value: string }[] => {
@@ -112,19 +112,19 @@ const LandingAccord = ({
     { key: "energy2", value: "Ground" },
     { key: "energy3", value: "Energy" },
     { key: "energy4", value: "Nature Conservation" },
-    { key: "energy5", value: "Environmental measurements(ground,water)" },
-    { key: "energy6", value: "Environmental measurements(air,noise,nuclear)" },
+    { key: "energy5", value: "Environmental measurements(ground-water)" },
+    { key: "energy6", value: "Environmental measurements(air-noise-nuclear)" },
   ];
   const societyItems: ListItem[] = [
     { key: "society1", value: "Population" },
     { key: "society2", value: "Hospital and care" },
-    { key: "society3", value: "Environmental-measurements(ground,water)" },
+    { key: "society3", value: "Environmental-measurements(ground and water)" },
   ];
   const agriculture: ListItem[] = [
     { key: "agriculture", value: "Arable-and-Forest-Soil" },
   ];
   const spaceAndLocation: ListItem[] = [
-    { key: "space1", value: "Maps(topography,terrain,altitude)" },
+    { key: "space1", value: "Maps(topography-terrain-altitude)" },
     { key: "space2", value: "Satellite images" },
   ];
   const TransportAndTechnology: ListItem[] = [
@@ -175,20 +175,18 @@ const LandingAccord = ({
     <>
       {sidebarOpen && (
         <AccordionGroup sx={{ maxWidth: 400 }}>
-          <Accordion >
+          <Accordion expanded={setExpanded('General Maps')} onChange={(event: React.SyntheticEvent, expanded: boolean)=>{expanded=false}}>
             <AccordionSummary>General Maps</AccordionSummary>
             <AccordionDetails>
               <AccordionGroup>
                 {Object.entries(generalItems).map(([key, value]) => (
-                  <Accordion key={key}>
+                  <Accordion key={key} expanded={setExpanded(value)}>
                     <AccordionSummary>{value}</AccordionSummary>
                     <AccordionDetails>
                       {getSelectedArray(key).map((item) => (
                         <Stack key={item.key} sx={{ ml: 2 }}>
                           {
                             <ListItemButton
-                              // checked={selectedValues.includes(item.value)} // Optional for selection logic
-                              // onChange={handleChange}                   // Optional for selection logic
                               onClick={() => {
                                 navigate("/Updateside", {
                                   state: `General Maps,${value},${item.value}`,
@@ -206,25 +204,18 @@ const LandingAccord = ({
               </AccordionGroup>
             </AccordionDetails>
           </Accordion>
-          <Accordion>
+          <Accordion expanded={setExpanded('Historical Incidents')}>
             <AccordionSummary>Historical Incidents</AccordionSummary>
             <AccordionDetails>
               <AccordionGroup>
                 {Object.entries(historicalItems).map(([key, value]) => (
-                  <Accordion key={key}>
+                  <Accordion key={key} expanded={setExpanded(value)} >
                     <AccordionSummary>{value}</AccordionSummary>
                     <AccordionDetails>
                       {Histarray(key).map((item) => (
                         <Stack key={item.key}>
                           <ListItemButton
-                            // checked={selectedValues.includes(item.value)}
-                            // onChange={handleChange}
                             onClick={() => {
-                              handleAccordionClick(
-                                "Historical Incidents",
-                                value,
-                                item.value
-                              );
                               navigate("/Updateside", {
                                 state: `Historical Incidents,${value},${item.value}`,
                               });
@@ -240,35 +231,25 @@ const LandingAccord = ({
               </AccordionGroup>
             </AccordionDetails>
           </Accordion>
-          <Accordion>
+          <Accordion expanded={setExpanded('Weather Maps')}>
             <AccordionSummary>Weather Maps</AccordionSummary>
             <AccordionDetails>
               <AccordionGroup>
                 {Object.entries(weatherItems).map(([key, value]) => (
-                  <Accordion key={key}>
+                  <Accordion key={key}   expanded={setExpanded(value)}>
                     <AccordionSummary>{value}</AccordionSummary>
                     <AccordionDetails>
                       {weathermap(key).map((item) => (
                         <Stack key={item.key}>
-                          <Link
-                            to={`/Updateside/${selectedKeys}`}
-                            style={{ textDecoration: "none", color: "black" }}
+                          <ListItemButton
+                            onClick={() => {
+                              navigate("/Updateside", {
+                                state: `Weather Maps,${value},${item.value}`,
+                              });
+                            }}
                           >
-                            <ListItemButton
-                              // checked={selectedValues.includes(item.value)}
-                              // onChange={handleChange}
-
-                              onClick={() => {
-                                handleAccordionClick(
-                                  "Weather Maps",
-                                  value,
-                                  item.value
-                                );
-                              }}
-                            >
-                              {item.value}
-                            </ListItemButton>
-                          </Link>
+                            {item.value}
+                          </ListItemButton>
                         </Stack>
                       ))}
                     </AccordionDetails>
