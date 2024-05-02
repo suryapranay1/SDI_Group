@@ -16,24 +16,24 @@ function App() {
   return (
 
       <>
-        {/* <TabsSegmentedControls />
+        <TabsSegmentedControls />
         <ButtonAppBar />
-
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<BasicGrid />}>
             <Route path="/list" element={<DataTable />} />
             <Route path="" element={<DataList />} />
           </Route>
-        </Routes> */}
-        <BrowserRouter>
+        </Routes>
+        </BrowserRouter>
+        {/* <BrowserRouter>
         <Routes>
           <Route path='/' element={<AccordionItemComponent sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}>
             <Route path='/Updateside' element={<CheckboxList/>}/>
             <Route path='' element={<LandingAccord sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}></Route>
           </Route>
         </Routes>
-        </BrowserRouter>
-    {/* <CheckboxList/> */}
+        </BrowserRouter> */}
     </>
 
 

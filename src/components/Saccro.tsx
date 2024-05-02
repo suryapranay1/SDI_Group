@@ -17,6 +17,10 @@ interface ListItem {
   key: string;
   value: string;
 }
+interface AccordionL1 {
+  key: string;
+  l2Keys: string[];
+}
 const AccordionItem = styled(Typography)({
   padding: 6,
   cursor: "pointer",
@@ -24,31 +28,141 @@ const AccordionItem = styled(Typography)({
     backgroundColor: "#fff",
   },
 });
-const generalItems = {
-  energy: "Energy and Environment",
-  health: "Society and Health",
-  agriculture: "Agriculture and Forestry",
-  space: "Space and Location",
-  transport: "Transport and Technology",
-  economy: "Economy and Finances",
-};
-const historicalItems = {
-  historical: "Geo Hazards",
-};
-const weatherItems = {
-  weather: "Climate and Weather",
-};
-
-const providerItems = {
-  federation: "Federation",
-  states: "States and Local Authorrities",
-  econamy: "Economy",
-  science: "Science",
-};
-const applicationsItems = {
-  special: "Specialised Applications",
-  geoportal: "Geoportals of the Federal States",
-};
+interface Level1def {
+  key: string;
+  title: string;
+  childAccord: {
+    key: string;
+    title: string;
+    mapList?: {
+      key: string;
+      title: string;
+    }[];
+  }[];
+}
+const Level1: Level1def[] = [
+  {
+    key: "general-maps",
+    title: "General Maps",
+    childAccord: [
+      {
+        key: "energy-and-environemnt",
+        title: "Energy and Environment",
+        mapList: [
+          { key: "arable-and-forest", title: "Arable and Forest Soil" },
+          { key: "ground", title: "Ground" },
+          { key: "energy", title: "Energy" },
+          { key: "nature-conservation", title: "Nature Conservation" },
+          {
+            key: "ground-water-measurement",
+            title: "Environmental measurements(ground-water)",
+          },
+          {
+            key: "air-noise-nuclear-measurements",
+            title: "Environmental measurements(air-noise-nuclear)",
+          },
+        ],
+      },
+      {
+        key: "society-and-health",
+        title: "Society and Health",
+        mapList: [
+          { key: "population", title: "Population" },
+          { key: "hospital-and-care", title: "Hospital and care" },
+          {
+            key: "ground-water-measurements",
+            title: "Environmental-measurements(ground and water)",
+          },
+        ],
+      },
+      {
+        key: "agriculture-and-forestry",
+        title: "Agriculture and Forestry",
+        mapList: [
+          { key: "arable-and-forestry", title: "Arable-and-Forest-Soil" },
+        ],
+      },
+      {
+        key: "space-and-location",
+        title: "Space and Location",
+        mapList: [
+          {
+            key: "topography-terrain-altitude",
+            title: "Maps(topography-terrain-altitude)",
+          },
+          { key: "satellite-images", title: "Satellite images" },
+        ],
+      },
+      {
+        key: "transport-and-technology",
+        title: "Transport and Technology",
+        mapList: [
+          { key: "flight", title: "Flight" },
+          { key: "rail", title: "Rail" },
+          { key: "street", title: "Street" },
+        ],
+      },
+      {
+        key: "economy-and-finances",
+        title: "Economy and Finances",
+        mapList: [
+          { key: "finance", title: "Finance" },
+          { key: "economy", title: "Economy" },
+        ],
+      },
+    ],
+  },
+  {
+    key: "historical-incidents",
+    title: "Historical Incidents",
+    childAccord: [
+      {
+        key: "geo-hazards",
+        title: "Geo Hazards",
+        mapList: [
+          { key: "floods-and-heavy-rain", title: "Floods and heavy rain" },
+          { key: "earthquakepoints", title: "Earthquake points" },
+          { key: "landslides", title: "Landslides" },
+        ],
+      },
+    ],
+  },
+  {
+    key: "weather-maps",
+    title: "Weather Maps",
+    childAccord: [
+      {
+        key: "climate-and-weather",
+        title: "Climate and Weather",
+        mapList: [{ key: "Climate1", title: "Weather-current" }],
+      },
+    ],
+  },
+  {
+    key: "applications",
+    title: "Applications",
+    childAccord: [
+      { key: "specialised-applications", title: "Specialised Applications" },
+      {
+        key: "geoportals-of-the-federal-states",
+        title: "Geoportals of the Federal States",
+      },
+    ],
+  },
+  {
+    key: "data-providers",
+    title: "Data Providers",
+    childAccord: [
+      { key: "federation", title: "Federation" },
+      {
+        key: "states-and-local-authorities",
+        title: "States and Local Authorities",
+      },
+      { key: "economy", title: "Economy" },
+      { key: "science", title: "Science" },
+    ],
+  },
+];
 const LandingAccord = ({
   sidebarOpen,
   setSidebarOpen,
@@ -56,243 +170,144 @@ const LandingAccord = ({
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [active, setActive] = useState<AccordionL1[]>([]);
   const navigate = useNavigate();
-  const value=useLocation();
-  const selectedKey=value.state;
+  const value = useLocation();
+  console.log(value.state);
+  const selectedKey = value.state;
   const selectedArray = selectedKey?.split(",");
   const firstelement = selectedArray?.slice(0)[0];
   const secondelement = selectedArray?.slice(1)[0];
   const lastElement = selectedArray?.slice(-1)[0];
-  console.log(selectedArray);
-  const setExpanded=(key:string)=>{
-    if(key===firstelement || key===secondelement)
-      {
-        return true;
-      }
-  }
-  const getSelectedArray = (
-    currentArrayKey: string
-  ): { key: string; value: string }[] => {
-    switch (currentArrayKey) {
-      case "energy":
-        return energyItems;
-      case "health":
-        return societyItems;
-      case "agriculture":
-        return agriculture;
-      case "space":
-        return spaceAndLocation;
-      case "transport":
-        return TransportAndTechnology;
-      case "economy":
-        return EconomyAndFinance;
-      default:
-        return empty;
-    }
-  };
-  const Histarray = (Key: string): { key: string; value: string }[] => {
-    switch (Key) {
-      case "historical":
-        return GeoHazards;
-      default:
-        return empty;
-    }
-  };
-  const weathermap = (Key: string): { key: string; value: string }[] => {
-    switch (Key) {
-      case "weather":
-        return ClimateAndWeather;
-      default:
-        return empty;
-    }
-  };
-  const empty: ListItem[] = [];
-  const energyItems: ListItem[] = [
-    { key: "energy1", value: "Arable and Forest Soil" },
-    { key: "energy2", value: "Ground" },
-    { key: "energy3", value: "Energy" },
-    { key: "energy4", value: "Nature Conservation" },
-    { key: "energy5", value: "Environmental measurements(ground-water)" },
-    { key: "energy6", value: "Environmental measurements(air-noise-nuclear)" },
-  ];
-  const societyItems: ListItem[] = [
-    { key: "society1", value: "Population" },
-    { key: "society2", value: "Hospital and care" },
-    { key: "society3", value: "Environmental-measurements(ground and water)" },
-  ];
-  const agriculture: ListItem[] = [
-    { key: "agriculture", value: "Arable-and-Forest-Soil" },
-  ];
-  const spaceAndLocation: ListItem[] = [
-    { key: "space1", value: "Maps(topography-terrain-altitude)" },
-    { key: "space2", value: "Satellite images" },
-  ];
-  const TransportAndTechnology: ListItem[] = [
-    { key: "Transport1", value: "Flight" },
-    { key: "Transport2", value: "Rail" },
-    { key: "Transport3", value: "Street" },
-  ];
-  const EconomyAndFinance: ListItem[] = [
-    { key: "Economy1", value: "Finance" },
-    { key: "Economy2", value: "Economy" },
-  ];
-  const GeoHazards: ListItem[] = [
-    { key: "Geo1", value: "Floods and heavy rain" },
-    { key: "Geo2", value: "Earthquake points" },
-    { key: "Geo3", value: "Landslides" },
-  ];
-  const ClimateAndWeather: ListItem[] = [
-    { key: "Climate1", value: "Weather-current" },
-  ];
-  const SpecialisedApplications: ListItem[] = [
-    { key: "Application1", value: "Application" },
-    { key: "Application2", value: "Application" },
-  ];
-
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked, value } = event.target;
-    const newSelectedValues = [...selectedValues];
-
-    if (checked) {
-      // Add the value if checked
-      if (!newSelectedValues.includes(value)) {
-        newSelectedValues.push(value);
-      }
+  // if (firstelement!==null)
+  //   {
+  //     setActive(firstelement);
+  //   }
+  useEffect(() => {
+    if (firstelement && secondelement) {
+      setActive([
+        {
+          key: firstelement,
+          l2Keys: [secondelement],
+        },
+      ]);
+    } else if (firstelement) {
+      setActive([
+        {
+          key: firstelement,
+          l2Keys: [],
+        },
+      ]);
     } else {
-      // Remove the value if unchecked
-      const index = newSelectedValues.indexOf(value);
-      if (index > -1) {
-        newSelectedValues.splice(index, 1);
-      }
+      setActive([]);
     }
-    console.log(newSelectedValues);
+  }, [firstelement, secondelement]);
+  
+  const toggleState=(keys:string[],level:string,status:boolean)=>{
+    // console.log(keys,level,status);
+    if(level==="l1"){
+    setActive(prev=>{
+      if(status)
+        {
+          return[
+            ...prev,
+            {
+              key:keys[0],
+              l2Keys:[]
+            }
+          ]
 
-    setSelectedValues(newSelectedValues);
-  };
+        }
+      else{
+        return prev.filter((item)=>item.key!==keys[0])
+      }
 
+    })
+  }
+  else if(level==="l2"){
+    setActive(prev=>{
+      const l1Array=prev.find((l1Item)=>l1Item.key===keys[0]);
+      const otherArrayElements=prev.filter((item)=>item.key!==keys[0])
+      if (l1Array){
+      if(status){
+        l1Array?.l2Keys.push(keys[1]);
+      }
+      else{
+          l1Array.l2Keys=l1Array.l2Keys.filter((item)=>item!==keys[1])
+      }
+      otherArrayElements.push(l1Array);
+    }
+      return otherArrayElements
+    })
+  }
+}
   return (
     <>
       {sidebarOpen && (
         <AccordionGroup sx={{ maxWidth: 400 }}>
-          <Accordion expanded={setExpanded('General Maps')} onChange={(event: React.SyntheticEvent, expanded: boolean)=>{expanded=false}}>
-            <AccordionSummary>General Maps</AccordionSummary>
-            <AccordionDetails>
-              <AccordionGroup>
-                {Object.entries(generalItems).map(([key, value]) => (
-                  <Accordion key={key} expanded={setExpanded(value)}>
-                    <AccordionSummary>{value}</AccordionSummary>
-                    <AccordionDetails>
-                      {getSelectedArray(key).map((item) => (
-                        <Stack key={item.key} sx={{ ml: 2 }}>
-                          {
-                            <ListItemButton
-                              onClick={() => {
-                                navigate("/Updateside", {
-                                  state: `General Maps,${value},${item.value}`,
-                                });
-                              }}
-                            >
-                              <ListItemText primary={item.value} />
-                            </ListItemButton>
-                          }
-                        </Stack>
-                      ))}
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </AccordionGroup>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={setExpanded('Historical Incidents')}>
-            <AccordionSummary>Historical Incidents</AccordionSummary>
-            <AccordionDetails>
-              <AccordionGroup>
-                {Object.entries(historicalItems).map(([key, value]) => (
-                  <Accordion key={key} expanded={setExpanded(value)} >
-                    <AccordionSummary>{value}</AccordionSummary>
-                    <AccordionDetails>
-                      {Histarray(key).map((item) => (
-                        <Stack key={item.key}>
+          {Level1.map((item) => {
+            const l1Expand=active.find((l1Item)=>l1Item.key===item.key)?true:false
+            return (
+              <Accordion
+                expanded={l1Expand}
+                onChange={(
+                  event: React.SyntheticEvent,
+                  expanded: boolean
+                ) => {
+                  toggleState([item.key],'l1',expanded)
+                }}
+              >
+                <AccordionSummary>{item.title}</AccordionSummary>
+                <AccordionDetails>
+                  <AccordionGroup>
+                    {item.childAccord.map(({ key, title, mapList }) =>{
+                    const l1Array=active.find((l1Item)=>l1Item.key===item.key);
+                     const l2Expand=l1Array?.l2Keys.find((l2Item)=>l2Item===key)?true:false
+                      return mapList ? (
+                        <Accordion key={key} expanded={l2Expand}
+                        onChange={(
+                          event: React.SyntheticEvent,
+                          expanded: boolean
+                        ) => {
+                          toggleState([item.key,key],'l2',expanded)
+                        }} 
+                        >
+                          <AccordionSummary>{title}</AccordionSummary>
+                          <AccordionDetails>
+                            {mapList?.map((mapItem) => (
+                              <Stack key={mapItem.key} sx={{ ml: 2 }}>
+                                <ListItemButton
+                                  onClick={() => {
+                                    navigate("/Updateside", {
+                                      state: `${item.key},${key},${mapItem.key}`,
+                                    });
+                                  }}
+                                >
+                                  <ListItemText primary={mapItem.title} />
+                                </ListItemButton>
+                              </Stack>
+                            ))}
+                          </AccordionDetails>
+                        </Accordion>
+                      ) : (
+                        <Stack key={key} sx={{ ml: 2 }}>
                           <ListItemButton
                             onClick={() => {
-                              navigate("/Updateside", {
-                                state: `Historical Incidents,${value},${item.value}`,
-                              });
+                              // navigate("/Updateside", {
+                              //   state:` ${item.key},${key}`,
+                              // });
                             }}
                           >
-                            {item.value}
+                            <ListItemText primary={title} />
                           </ListItemButton>
                         </Stack>
-                      ))}
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </AccordionGroup>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={setExpanded('Weather Maps')}>
-            <AccordionSummary>Weather Maps</AccordionSummary>
-            <AccordionDetails>
-              <AccordionGroup>
-                {Object.entries(weatherItems).map(([key, value]) => (
-                  <Accordion key={key}   expanded={setExpanded(value)}>
-                    <AccordionSummary>{value}</AccordionSummary>
-                    <AccordionDetails>
-                      {weathermap(key).map((item) => (
-                        <Stack key={item.key}>
-                          <ListItemButton
-                            onClick={() => {
-                              navigate("/Updateside", {
-                                state: `Weather Maps,${value},${item.value}`,
-                              });
-                            }}
-                          >
-                            {item.value}
-                          </ListItemButton>
-                        </Stack>
-                      ))}
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </AccordionGroup>
-            </AccordionDetails>
-          </Accordion>
-
-          <Accordion>
-            <AccordionSummary>Applications</AccordionSummary>
-            <AccordionDetails>
-              <Stack gap={1}>
-                {Object.entries(applicationsItems).map(([key, value]) => (
-                  <AccordionItem
-                    key={key}
-                    onClick={() => {
-                      // toggleApplicationMaps(key);
-                    }}
-                  >
-                    {value}
-                  </AccordionItem>
-                ))}
-              </Stack>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary>Data Providers</AccordionSummary>
-            <AccordionDetails>
-              <Stack gap={1}>
-                {Object.entries(providerItems).map(([key, value]) => (
-                  <AccordionItem
-                    key={key}
-                    onClick={() => {
-                      // toggleProviderMaps(key);
-                    }}
-                  >
-                    {value}
-                  </AccordionItem>
-                ))}
-              </Stack>
-            </AccordionDetails>
-          </Accordion>
+                      )}
+                    )}
+                  </AccordionGroup>
+                </AccordionDetails>
+              </Accordion>
+            );
+          })}
         </AccordionGroup>
       )}
       {/* <GeneralMapComponent /> */}

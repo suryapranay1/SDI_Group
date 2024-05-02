@@ -24,47 +24,47 @@ const CheckboxList = () => {
   console.log(selectedArray);
   const getSelectedArray = (): { key: string; value: string }[] => {
     switch (lastElement) {
-      case "Arable and Forest Soil":
+      case "arable-and-forest":
         return arableForest;
-      case "Ground":
+      case "ground":
         return ground;
-      case "Energy":
+      case "energy":
         return energy;
-      case "Nature Conservation":
+      case "nature-conservation":
         return natureconversation;
-      case "Environmental measurements(ground-water)":
+      case "ground-water-measurement":
         return environmentalwater;
-      case "Environmental measurements(air-noise-nuclear)":
+      case "air-noise-nuclear-measurements":
         return environmentalair;
-      case "Population":
+      case "population":
         return SocietyAndHealth;
-      case "Hospital and care":
+      case "hospital-and-care":
         return hospitalCare;
-      case "Environmental-measurements(ground and water)":
+      case "ground-water-measurements":
         return environmentGround;
-      case "Arable-and-Forest-Soil":
+      case "arable-and-forestry":
         return AgricultureAndForesty;
-      case "Maps(topography-terrain-altitude)":
+      case "topography-terrain-altitude":
         return maps;
-      case "Satellite images":
+      case "satellite-images":
         return satelliteImages;
-      case "Flight":
+      case "flight":
         return flight;
-      case "Rail":
+      case "rail":
         return rail;
-      case "Street":
+      case "street":
         return street;
-      case "Finance":
+      case "finance":
         return finance;
-      case "Economy":
+      case "economy":
         return Economy;
-      case "Floods and heavy rain":
+      case "floods-and-heavy-rain":
         return floods;
-      case "Earthquake points":
+      case "earthquakepoints":
         return earthquake;
-      case "Landslides":
+      case "landslides":
         return landslides;
-      case "Weather-current":
+      case "Climate1":
         return weatherCurrent;
       default:
         return empty;
