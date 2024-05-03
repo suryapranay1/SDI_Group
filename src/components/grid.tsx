@@ -6,6 +6,8 @@ import Box from '@mui/joy/Box';
 import Grid from '@mui/joy/Grid';
 import AccordionIndicator from './filter';
 import { Outlet } from 'react-router-dom';
+import TabsSegmentedControls from './tab';
+import ButtonAppBar from './tabchild';
 
 const Item = styled(Sheet)(({ theme }) => ({
     backgroundColor:'transparent',
@@ -16,6 +18,9 @@ const Item = styled(Sheet)(({ theme }) => ({
 }));
 export default function BasicGrid() {
   return (
+    <>
+            <TabsSegmentedControls />
+        <ButtonAppBar />
     <Grid container spacing={0.3} sx={{ flexGrow: 1,height:'100%' }}>
       <Grid xs={2}>
         <Item variant='plain'>
@@ -33,5 +38,6 @@ export default function BasicGrid() {
         <Item><Outlet /></Item>
       </Grid>
     </Grid>
+    </>
   );
 }

@@ -17,13 +17,16 @@ const CheckboxList = () => {
   const selectedArray = selectedKeys?.split(",");
   const firstelement = selectedArray?.slice(0)[0];
   const secondelement = selectedArray?.slice(1)[0];
-  const lastElement = selectedArray?.slice(-1)[0];
+  const thirdelement = selectedArray?.slice(2)[0];
+  const bread1 = selectedArray?.slice(3)[0];
+  const bread2 = selectedArray?.slice(4)[0];
+  const bread3 = selectedArray?.slice(5)[0];
   // console.log(lastElement);
   // console.log(firstelement);
   // console.log(secondelement);
   console.log(selectedArray);
   const getSelectedArray = (): { key: string; value: string }[] => {
-    switch (lastElement) {
+    switch (thirdelement) {
       case "arable-and-forest":
         return arableForest;
       case "ground":
@@ -232,14 +235,14 @@ const CheckboxList = () => {
           <Typography>Home</Typography>
           </ListItemButton>
           <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement}, ,`})}}>
-            <Typography>{firstelement}</Typography>
+            <Typography>{bread1}</Typography>
             </ListItemButton>
           <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement},${secondelement}, `})}}>
-            <Typography>{secondelement}</Typography>
+            <Typography>{bread2}</Typography>
           </ListItemButton>
 
 
-        <Typography sx={{fontWeight:'bold'}}>{lastElement}</Typography>
+        <Typography sx={{fontWeight:'bold'}}>{bread3}</Typography>
       </Breadcrumbs>
       {getSelectedArray().map((item) => (
         <Grid key={item.key} sx={{ ml: 2 }}>

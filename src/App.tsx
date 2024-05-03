@@ -11,19 +11,20 @@ import BasicGrid from './components/grid';
 import AccordionItemComponent from './components/mapaccord';
 import CheckboxList from './components/checkbox';
 import LandingAccord from './components/Saccro';
+import CardVariants from './components/meta-data-card';
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
 
       <>
-        <TabsSegmentedControls />
-        <ButtonAppBar />
         <BrowserRouter>
         <Routes>
+
           <Route path="/" element={<BasicGrid />}>
             <Route path="/list" element={<DataTable />} />
             <Route path="" element={<DataList />} />
           </Route>
+          <Route path='/metaData' element={<CardVariants/>}/>
         </Routes>
         </BrowserRouter>
         {/* <BrowserRouter>

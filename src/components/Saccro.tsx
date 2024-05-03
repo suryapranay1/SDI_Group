@@ -279,7 +279,7 @@ const LandingAccord = ({
                                 <ListItemButton
                                   onClick={() => {
                                     navigate("/Updateside", {
-                                      state: `${item.key},${key},${mapItem.key}`,
+                                      state: `${item.key},${key},${mapItem.key},${item.title},${title},${mapItem.title}`,
                                     });
                                   }}
                                 >
