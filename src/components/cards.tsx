@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  Grid,
-  Stack,
-  Typography,
-  Divider,
-} from "@mui/joy";
+import { Box, Button, Card, Grid, Stack, Typography, Divider, Checkbox } from "@mui/joy";
 import React, { useState } from "react";
 import StorageIcon from "@mui/icons-material/Storage";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +11,7 @@ import DeleteForever from "@mui/icons-material/DeleteForever";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import { Backdrop } from "@mui/material";
+import { Backdrop, FormControlLabel } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
@@ -29,8 +21,8 @@ import RadioGroup from "@mui/joy/RadioGroup";
 import Person from "@mui/icons-material/Person";
 import Apartment from "@mui/icons-material/Apartment";
 import PublicIcon from "@mui/icons-material/Public";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
 const cardData = [
   {
     Name: "map3",
@@ -97,7 +89,30 @@ const DataList = () => {
   const [openEdit, setEdit] = React.useState<boolean>(false);
   const [opendel, setdel] = React.useState<boolean>(false);
   const [openShare, setShare] = React.useState<boolean>(false);
+  const [editShare, setEditShare] = React.useState<boolean>(false);
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
   const naviagate = useNavigate();
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, value } = event.target;
+    const newSelectedValues = [...selectedValues];
+
+    if (checked) {
+      // Add the value if checked
+      if (!newSelectedValues.includes(value)) {
+        newSelectedValues.push(value);
+      }
+    } else {
+      // Remove the value if unchecked
+      const index = newSelectedValues.indexOf(value);
+      if (index > -1) {
+        newSelectedValues.splice(index, 1);
+      }
+    }
+    console.log(newSelectedValues);
+
+    setSelectedValues(newSelectedValues);
+  };
   return (
     <Stack marginLeft={"2rem"}>
       <Grid container spacing={1}>
@@ -176,9 +191,10 @@ const DataList = () => {
                             }}
                           >
                             <b>Share</b>
-                            <Button variant="plain" color="neutral"
+                            <Button
+                              variant="plain"
+                              color="neutral"
                               sx={{
-
                                 padding: "none",
                                 "&:hover": {
                                   backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
@@ -205,7 +221,9 @@ const DataList = () => {
                             }}
                           >
                             <Typography>Set Sharing Level</Typography>
-                            <Button startDecorator={<RestartAltIcon/>} sx={{
+                            <Button
+                              startDecorator={<RestartAltIcon />}
+                              sx={{
                                 backgroundColor: "grey",
                                 padding: "none",
                                 "&:hover": {
@@ -213,7 +231,10 @@ const DataList = () => {
                                   cursor: "pointer",
                                   color: "black",
                                 },
-                              }}>Revert</Button>
+                              }}
+                            >
+                              Revert
+                            </Button>
                           </Box>
                           <RadioGroup
                             aria-label="Your plan"
@@ -249,8 +270,7 @@ const DataList = () => {
                                     }
                                   </ListItemDecorator>
                                   <Radio
-                                  color="success"
-                                    overlay
+                                    color="success"
                                     value={item}
                                     label={item}
                                     slotProps={{
@@ -259,7 +279,6 @@ const DataList = () => {
                                           ...(checked && {
                                             inset: -1,
                                             border: "2px solid",
-                                            
                                           }),
                                         }),
                                       }),
@@ -269,13 +288,28 @@ const DataList = () => {
                               ))}
                             </List>
                           </RadioGroup>
-                          <Divider/>
-                          <Typography component="h6">Set group sharing</Typography><br/>
-                          <Box sx={{display:'flex',justifyContent:'space-between',width:'100%'}}>
+                          <Divider />
+                          <Typography component="h6">
+                            Set group sharing
+                          </Typography>
+                          <br />
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              width: "100%",
+                            }}
+                          >
                             <Typography>None yet</Typography>
-                            <Button variant="outlined" color='success' startDecorator={<Diversity3OutlinedIcon/>}>
+                            <Button
+                              variant="outlined"
+                              color="success"
+                              startDecorator={<Diversity3OutlinedIcon />}
+                              onClick={() => {
+                                setEditShare(true);
+                              }}
+                            >
                               Edit group sharing
-
                             </Button>
                           </Box>
                         </DialogContent>
@@ -459,6 +493,51 @@ const DataList = () => {
                             Cancel
                           </Button>
                         </DialogActions>
+                      </ModalDialog>
+                    </Modal>
+                    <Modal
+                      open={editShare}
+                      onClose={() => {
+                        setEditShare(false);
+                      }}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(175, 100%, 100%, 0.3)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>List Of Shared Groups</DialogTitle>
+                        <Divider />
+                        <DialogContent sx={{overflow:'hidden'}}> 
+                          {[
+                            { key: "group1", value: "Bharat-Manoj" },
+                            { key: "group2", value: "Bharat-pranay" },
+                            { key: "group3", value: "pranay-Manoj" },
+                            { key: "group4", value: "srineevas-Manoj" },
+                           
+                          ].map((item) => (
+                            <Grid key={item.key} sx={{ ml: 2}}>
+                              <FormControlLabel
+                              
+                                control={
+                                  <Checkbox
+                                    checked={selectedValues.includes(
+                                      item.value
+                                    )}
+                                    onChange={handleChange}
+                                    value={item.value}
+                                    sx={{padding:'1em',pl:'1.5em'}}
+                                  />
+                                }
+                                label={item.value}
+                              
+                              />
+                              
+                            </Grid>
+                          ))}
+                        </DialogContent>
                       </ModalDialog>
                     </Modal>
                   </Box>
