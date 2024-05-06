@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   Grid,
-  Input,
   Stack,
   Typography,
   Divider,
@@ -18,11 +17,24 @@ import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import IosShareIcon from "@mui/icons-material/IosShare";
+import { Backdrop } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import Radio from "@mui/joy/Radio";
+import RadioGroup from "@mui/joy/RadioGroup";
+import Person from "@mui/icons-material/Person";
+import Apartment from "@mui/icons-material/Apartment";
+import PublicIcon from "@mui/icons-material/Public";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
 const cardData = [
   {
     Name: "map3",
-    Datecreated: "3/1/2024",
+    DateCreated: "3/1/2024",
     dateLastModified: "2/3/2024",
     Description: "gcrs map3",
     levelofsharing: "admin",
@@ -30,6 +42,17 @@ const cardData = [
     PointOfContact: "jcgeonodetester",
     Language: "eng",
     SupplementalInformation: "No information provided",
+    hello1:
+      "hi everyone how are you Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias amet quisquam accusantium aliquid omnis, inventore saepe, modi corporis excepturi quod suscipit obcaecati soluta perspiciatis possimus maiores eligendi temporibus cumque repellat!",
+    hello2: "hi everyone how are you",
+    hello3: "hi everyone how are you",
+    hello4: "hi everyone how are you",
+    hello5: "hi everyone how are you",
+    hello6: "hi everyone how are you",
+    hello7: "hi everyone how are you",
+    hello8: "hi everyone how are you",
+    hello9: "hi everyone how are you",
+    hello10: "hi everyone how are you",
   },
   {
     Name: "Aerial Photography (Orthophoto) - 2021",
@@ -72,19 +95,9 @@ const cardData = [
 const DataList = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [openEdit, setEdit] = React.useState<boolean>(false);
+  const [opendel, setdel] = React.useState<boolean>(false);
+  const [openShare, setShare] = React.useState<boolean>(false);
   const naviagate = useNavigate();
-  const [searchText, setSearchText] = useState("");
-
-  const handleSearch = () => {
-    console.log(searchText);
-  };
-
-  const handleInputChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setSearchText(event.target.value);
-  };
-
   return (
     <Stack marginLeft={"2rem"}>
       <Grid container spacing={1}>
@@ -107,14 +120,14 @@ const DataList = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <Box >
+                <Box>
                   <StorageIcon sx={{ mr: "1em", mt: "0.2em" }} />
                   <Button
                     sx={{
                       backgroundColor: "#458844ba",
                       color: "white",
                       "&:hover": {
-                        backgroundColor: "#a2bc69", // Customize hover background color
+                        backgroundColor: "#a2bc69",
                         cursor: "pointer",
                       },
                     }}
@@ -127,84 +140,327 @@ const DataList = () => {
                     </Typography>
                   </Button>
                 </Box>
-                <Box sx={{display:'flex'}}>
-                <Box>
-                  <Button
-                    variant="outlined"
-                    color="danger"
-                    onClick={() => setOpen(true)}
-                  >
-                    <DeleteForever />
-                  </Button>
-                  
-                  <Modal open={open} onClose={() => setOpen(false)}>
-                    <ModalDialog variant="outlined" role="alertdialog">
-                      <DialogTitle>
-                        <WarningRoundedIcon />
-                        Confirmation
-                      </DialogTitle>
-                      <Divider />
-                      <DialogContent>
-                        Are you sure you want to discard all of your notes?
-                      </DialogContent>
-                      <DialogActions>
-                        <Button
-                          variant="solid"
-                          color="danger"
-                          onClick={() => {
-                            setOpen(false);
-                          }}
-                          
-                        >
-                          Delete
-                        </Button>
-                        <Button
-                          variant="plain"
-                          color="neutral"
-                          onClick={() => setOpen(false)}
-                        >
-                          Cancel
-                        </Button>
-                      </DialogActions>
-                    </ModalDialog>
-                  </Modal>
+                <Box sx={{ display: "flex" }}>
+                  <Box>
+                    <Button
+                      variant="plain"
+                      sx={{
+                        color: "grey",
+                        "&:hover": {
+                          backgroundColor: "hsla(220, 3%, 48%, 0.5)",
+                          cursor: "pointer",
+                        },
+                      }}
+                      onClick={() => setShare(true)}
+                    >
+                      <IosShareIcon />
+                    </Button>
+                    <Modal
+                      open={openShare}
+                      onClose={() => setShare(false)}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              width: "100%",
+                            }}
+                          >
+                            <b>Share</b>
+                            <Button variant="plain" color="neutral"
+                              sx={{
+
+                                padding: "none",
+                                "&:hover": {
+                                  backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                  cursor: "pointer",
+                                  color: "black",
+                                },
+                              }}
+                              onClick={() => {
+                                setShare(false);
+                              }}
+                            >
+                              <CloseIcon />
+                            </Button>
+                          </Box>
+                        </DialogTitle>
+                        <Divider />
+                        <DialogContent>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              width: "100%",
+                            }}
+                          >
+                            <Typography>Set Sharing Level</Typography>
+                            <Button startDecorator={<RestartAltIcon/>} sx={{
+                                backgroundColor: "grey",
+                                padding: "none",
+                                "&:hover": {
+                                  backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                  cursor: "pointer",
+                                  color: "black",
+                                },
+                              }}>Revert</Button>
+                          </Box>
+                          <RadioGroup
+                            aria-label="Your plan"
+                            name="people"
+                            defaultValue="Individual"
+                          >
+                            <List
+                              sx={{
+                                minWidth: 240,
+                                "--List-gap": "0.5rem",
+                                "--ListItem-paddingY": "1rem",
+                                "--ListItem-radius": "8px",
+                                "--ListItemDecorator-size": "32px",
+                              }}
+                            >
+                              {[
+                                "Owner (owner of the item has access)",
+                                "Organisation (All members of your organisation has access)",
+                                "Everyone(public)",
+                              ].map((item, index) => (
+                                <ListItem
+                                  variant="outlined"
+                                  key={item}
+                                  sx={{ boxShadow: "sm" }}
+                                >
+                                  <ListItemDecorator>
+                                    {
+                                      [
+                                        <Person />,
+                                        <Apartment />,
+                                        <PublicIcon />,
+                                      ][index]
+                                    }
+                                  </ListItemDecorator>
+                                  <Radio
+                                  color="success"
+                                    overlay
+                                    value={item}
+                                    label={item}
+                                    slotProps={{
+                                      action: ({ checked }) => ({
+                                        sx: (theme) => ({
+                                          ...(checked && {
+                                            inset: -1,
+                                            border: "2px solid",
+                                            
+                                          }),
+                                        }),
+                                      }),
+                                    }}
+                                  />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </RadioGroup>
+                          <Divider/>
+                          <Typography component="h6">Set group sharing</Typography><br/>
+                          <Box sx={{display:'flex',justifyContent:'space-between',width:'100%'}}>
+                            <Typography>None yet</Typography>
+                            <Button variant="outlined" color='success' startDecorator={<Diversity3OutlinedIcon/>}>
+                              Edit group sharing
+
+                            </Button>
+                          </Box>
+                        </DialogContent>
+                        <Divider />
+                        <DialogActions>
+                          <Button
+                            variant="solid"
+                            sx={{
+                              color: "white",
+                              backgroundColor: "grey",
+                              "&:hover": {
+                                backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                cursor: "pointer",
+                              },
+                            }}
+                            onClick={() => {
+                              setShare(false);
+                            }}
+                          >
+                            Close
+                          </Button>
+                          <Button
+                            variant="solid"
+                            sx={{
+                              color: "white",
+                              backgroundColor: "#458844ba",
+                              "&:hover": {
+                                backgroundColor: "#a2bc69", // Customize hover background color
+                                cursor: "pointer",
+                              },
+                            }}
+                            onClick={() => {
+                              setShare(false);
+                            }}
+                          >
+                            Save
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
                   </Box>
                   <Box>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => setEdit(true)}
-                  >
-                    <EditOutlinedIcon />
-                  </Button>
-                  <Modal open={openEdit} onClose={() => setEdit(false)}>
-                    <ModalDialog variant="outlined" role="dialog">
-                      <DialogTitle>
-                        <WarningRoundedIcon />
-                        Confirmation
-                      </DialogTitle>
-                      <Divider />
-                      <DialogContent>
-                        Are you sure you want to edit the metadata?
-                      </DialogContent>
-                      <DialogActions>
-                        <Button
-                          variant="solid"
-                          color="primary"
-                          onClick={() => setEdit(false)}
-                        >
-                          edit
-                        </Button>
-                        <Button
-                          variant="plain"
-                          color="neutral"
-                          onClick={() => setEdit(false)}
-                        >
-                          Cancel
-                        </Button>
-                      </DialogActions>
-                    </ModalDialog>
-                  </Modal>
+                    <Button
+                      variant="plain"
+                      sx={{
+                        color: "grey",
+                        "&:hover": {
+                          backgroundColor: "hsla(220, 3%, 48%, 0.5)",
+                          cursor: "pointer",
+                        },
+                      }}
+                      onClick={() => setOpen(true)}
+                    >
+                      <DeleteForever />
+                    </Button>
+
+                    <Modal
+                      open={open}
+                      onClose={() => setOpen(false)}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>
+                          <WarningRoundedIcon />
+                          Confirmation
+                        </DialogTitle>
+                        <Divider />
+                        <DialogContent>
+                          Are you sure you want to delete your metadata?
+                        </DialogContent>
+                        <DialogActions>
+                          <Button
+                            variant="solid"
+                            sx={{
+                              color: "black",
+                              backgroundColor: "grey",
+                              "&:hover": {
+                                backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                cursor: "pointer",
+                              },
+                            }}
+                            onClick={() => {
+                              setOpen(false);
+                              setdel(true);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            variant="plain"
+                            color="neutral"
+                            onClick={() => setOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
+                    <Modal
+                      open={opendel}
+                      onClose={() => setdel(false)}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>Confirmation</DialogTitle>
+                        <Divider />
+                        <DialogContent>
+                          Your data is succesfully deleted
+                        </DialogContent>
+                        <DialogActions>
+                          <Button
+                            variant="solid"
+                            sx={{
+                              color: "black",
+                              backgroundColor: "grey",
+                              "&:hover": {
+                                backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                cursor: "pointer",
+                              },
+                            }}
+                            onClick={() => {
+                              setdel(false);
+                            }}
+                          >
+                            Close
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
+                  </Box>
+                  <Box>
+                    <Button
+                      variant="plain"
+                      color="primary"
+                      onClick={() => setEdit(true)}
+                    >
+                      <EditOutlinedIcon />
+                    </Button>
+                    <Modal
+                      open={openEdit}
+                      onClose={() => setEdit(false)}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="dialog">
+                        <DialogTitle>
+                          <WarningRoundedIcon />
+                          Confirmation
+                        </DialogTitle>
+                        <Divider />
+                        <DialogContent>
+                          Are you sure you want to edit the metadata?
+                        </DialogContent>
+                        <DialogActions>
+                          <Button
+                            variant="solid"
+                            color="primary"
+                            onClick={() => setEdit(false)}
+                          >
+                            edit
+                          </Button>
+                          <Button
+                            variant="plain"
+                            color="neutral"
+                            onClick={() => setEdit(false)}
+                          >
+                            Cancel
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
                   </Box>
                 </Box>
               </Box>

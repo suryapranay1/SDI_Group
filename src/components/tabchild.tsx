@@ -17,7 +17,7 @@ export default function ButtonAppBar() {
       <AppBar position="static" sx={{backgroundColor:"white"}}>
         <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
             <InputFileUpload/>
-          <Input placeholder="search" variant="outlined" color="success" startDecorator={<SearchIcon/>} sx={{width:'.3',color:"green",ml:'8em',mr:'16em',flexGrow:'0.8',}} />
+          <Input placeholder="search" variant="outlined" color="success" startDecorator={<SearchIcon/>} sx={{width:'.3',color:"green",ml:'8em',mr:'16em',flexGrow:'0.5',}} />
           <Box>
             <AppsMenu/>
           </Box>

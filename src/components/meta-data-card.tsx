@@ -8,7 +8,8 @@ import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { Button } from "@mui/joy";
 import { Sheet } from "@mui/joy";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import Button from '@mui/joy/Button';
+import img from '../images/Map-of-Andhra-Pradesh1.jpg';
+import { url } from "inspector";
 
 export default function CardVariants() {
   const value = useLocation();
@@ -16,25 +17,18 @@ export default function CardVariants() {
   const keys = Object.keys(data);
 
   return (
-    <Sheet
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100vw",
-        height: "100vh",
-      }}
-    >
+    <>
       <Button
         sx={{
-         backgroundColor: "#458844ba",
+          backgroundColor: "#458844ba",
           alignSelf: "flex-start",
           position: "fixed",
           left: "0em",
           color: "white",
+          zIndex: "100",
           "&:hover": {
-            backgroundColor: "#a2bc69", // Customize hover background color
-            cursor: "pointer",  
+            backgroundColor: "#a2bc69",
+            cursor: "pointer",
           },
         }}
       >
@@ -42,31 +36,47 @@ export default function CardVariants() {
           <ArrowBackIcon />
         </Link>
       </Button>
-      <Box
+      <Sheet
         sx={{
-          // width: '100%',
-          width: "40%",
-          maxWidth: "40%",
-          height: "fit-content",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: `url(${img})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center", 
         }}
       >
-        <Card variant="outlined">
-          <CardContent>
-            <Table>
-              <TableBody>
-                {keys.map((key) => (
-                  <TableRow key={key}>
-                    <TableCell component="th" scope="row">
-                      <b>{key}</b>
-                    </TableCell>
-                    <TableCell>{data[key]}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </Box>
-    </Sheet>
+        <Box
+          sx={{
+            width: "40%",
+            zIndex: "200",
+            maxWidth: "40%",
+            height: "fit-content",
+            maxHeight: "100%",
+            overflowY: "scroll",
+            marginLeft: "auto", 
+          }}
+        >
+          <Card variant="outlined">
+            <CardContent>
+              <Table>
+                <TableBody>
+                  {keys.map((key) => (
+                    <TableRow key={key}>
+                      <TableCell component="th" scope="row">
+                        <b>{key}</b>
+                      </TableCell>
+                      <TableCell>{data[key]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </Box>
+      </Sheet>
+    </>
   );
 }

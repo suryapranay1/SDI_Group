@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Outlet, BrowserRouter } from 'r
 import AccordionIndicator from './components/filter';
 import TableSortAndSelection from './components/table1';
 import ButtonAppBar from './components/tabchild';
-import TabsSegmentedControls from './components/tab';
 import DataTable from './components/table1';
 import DataList from './components/cards';
 import BasicGrid from './components/grid';
