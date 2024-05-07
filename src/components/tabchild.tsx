@@ -10,14 +10,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIconSideNavExample from './filterbutton';
 import AppsMenu from './view';
 
-
+const userName="bharat";
 export default function ButtonAppBar() {
   return (
     <Box sx={{ width:'100%',height:'sx' }}>
       <AppBar position="static" sx={{backgroundColor:"white"}}>
         <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
-            <InputFileUpload/>
-          <Input placeholder="search" variant="outlined" color="success" startDecorator={<SearchIcon/>} sx={{width:'.3',color:"green",ml:'8em',mr:'16em',flexGrow:'0.5',}} />
+        {userName && (<InputFileUpload/>)}
+          <Input placeholder="search" variant="outlined" color="success" startDecorator={<SearchIcon/>} sx={{width:'.3',color:"green",ml:'10em',mr:'16em',flexGrow:'0.5',}} />
           <Box>
             <AppsMenu/>
           </Box>

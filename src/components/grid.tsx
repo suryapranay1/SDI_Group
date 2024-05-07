@@ -27,7 +27,7 @@ const Item = styled(Sheet)(({ theme }) => ({
 
 const typeList: ListItem[] = [
   { key: "Type1", value: "KML" },
-  { key: "Type2", value: "SHL",},
+  { key: "Type2", value: "SHP",},
   { key: "Type3", value: "CSV" },
 ];
 
@@ -90,9 +90,6 @@ export default function BasicGrid() {
             <Box sx={{ width: "100%", backgroundColor: "none" }}>
               <Stack spacing={2}>
                 <Item sx={{ textAlign: "center" }}>Filters</Item>
-                {/* <Item>  <AccordionIndicator number='First' name='User Type' labels={['Super Admin', 'Admin', 'User']} />
-          <AccordionIndicator number='second' name='Roles' labels={['Role1', 'Role2', 'Role3']} />
-          <AccordionIndicator number='third' name='Recent Logins' labels={['Login1', 'Login2', 'Login3']} /></Item> */}
                 <Grid sx={{ ml: "0" }}><b>Filter By type</b></Grid>
                 {typeList.map((item) => (
                   <Grid key={item.key} sx={{ ml: 2 }}>

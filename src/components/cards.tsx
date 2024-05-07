@@ -1,4 +1,13 @@
-import { Box, Button, Card, Grid, Stack, Typography, Divider, Checkbox } from "@mui/joy";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  Stack,
+  Typography,
+  Divider,
+  Checkbox,
+} from "@mui/joy";
 import React, { useState } from "react";
 import StorageIcon from "@mui/icons-material/Storage";
 import { useNavigate } from "react-router-dom";
@@ -57,25 +66,25 @@ const cardData = [
   },
   {
     Name: "Aerial Photography (Orthophoto) - 2021",
-    DateCreated: "3/2/2024",
+    DateCreated: "4/2/2024",
     Description:
       "Aerial Photography Image Service (Orthophoto) of Tajkistan,at 3 inch resolution. Dated 2021.",
     tags: "orthophoto, ortho, aerial, imagery,  GIS",
-    dateLastModified: "3/2/2024",
+    dateLastModified: "5/2/2024",
     levelofsharing: "Public",
   },
   {
     Name: "Aerial Photography (Orthophoto) - 2021",
-    DateCreated: "3/2/2024",
+    DateCreated: "6/2/2024",
     Description:
       "Aerial Photography Image Service (Orthophoto) of Tajkistan,at 3 inch resolution. Dated 2021.",
     tags: "orthophoto, ortho, aerial, imagery,  GIS",
-    dateLastModified: "3/2/2024",
+    dateLastModified: "7/2/2024",
     levelofsharing: "Public",
   },
   {
     Name: "Aerial Photography (Orthophoto) - 2021",
-    DateCreated: "3/2/2024",
+    DateCreated: "8/2/2024",
     Description:
       "Aerial Photography Image Service (Orthophoto) of Tajkistan,at 3 inch resolution. Dated 2021.",
     tags: "orthophoto, ortho, aerial, imagery,  GIS",
@@ -83,7 +92,7 @@ const cardData = [
     levelofsharing: "Public",
   },
 ];
-
+const userName = "Bharat";
 const DataList = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [openEdit, setEdit] = React.useState<boolean>(false);
@@ -124,7 +133,7 @@ const DataList = () => {
             <Card
               variant="outlined"
               key={index}
-              sx={{ width: 800, mt: 3, bgcolor: "#fff" }}
+              sx={{ width: "auto", minWidth: 800, mt: 3, bgcolor: "#fff" }}
             >
               <Box
                 sx={{
@@ -157,19 +166,21 @@ const DataList = () => {
                 </Box>
                 <Box sx={{ display: "flex" }}>
                   <Box>
-                    <Button
-                      variant="plain"
-                      sx={{
-                        color: "grey",
-                        "&:hover": {
-                          backgroundColor: "hsla(220, 3%, 48%, 0.5)",
-                          cursor: "pointer",
-                        },
-                      }}
-                      onClick={() => setShare(true)}
-                    >
-                      <IosShareIcon />
-                    </Button>
+                    {userName && (
+                      <Button
+                        variant="plain"
+                        sx={{
+                          color: "grey",
+                          "&:hover": {
+                            backgroundColor: "hsla(220, 3%, 48%, 0.5)",
+                            cursor: "pointer",
+                          },
+                        }}
+                        onClick={() => setShare(true)}
+                      >
+                        <IosShareIcon />
+                      </Button>
+                    )}
                     <Modal
                       open={openShare}
                       onClose={() => setShare(false)}
@@ -270,6 +281,7 @@ const DataList = () => {
                                     }
                                   </ListItemDecorator>
                                   <Radio
+                                    overlay
                                     color="success"
                                     value={item}
                                     label={item}
@@ -279,6 +291,7 @@ const DataList = () => {
                                           ...(checked && {
                                             inset: -1,
                                             border: "2px solid",
+                                            borderColor:'green',
                                           }),
                                         }),
                                       }),
@@ -352,6 +365,7 @@ const DataList = () => {
                     </Modal>
                   </Box>
                   <Box>
+                  {userName && (
                     <Button
                       variant="plain"
                       sx={{
@@ -365,7 +379,7 @@ const DataList = () => {
                     >
                       <DeleteForever />
                     </Button>
-
+                  )}
                     <Modal
                       open={open}
                       onClose={() => setOpen(false)}
@@ -451,13 +465,14 @@ const DataList = () => {
                     </Modal>
                   </Box>
                   <Box>
+                  {userName && (
                     <Button
                       variant="plain"
                       color="primary"
                       onClick={() => setEdit(true)}
                     >
                       <EditOutlinedIcon />
-                    </Button>
+                    </Button>)}
                     <Modal
                       open={openEdit}
                       onClose={() => setEdit(false)}
@@ -481,7 +496,7 @@ const DataList = () => {
                           <Button
                             variant="solid"
                             color="primary"
-                            onClick={() => setEdit(false)}
+                            onClick={() =>{ setEdit(false); naviagate("/editData", { state: data });}}
                           >
                             edit
                           </Button>
@@ -510,17 +525,15 @@ const DataList = () => {
                       <ModalDialog variant="outlined" role="alertdialog">
                         <DialogTitle>List Of Shared Groups</DialogTitle>
                         <Divider />
-                        <DialogContent sx={{overflow:'hidden'}}> 
+                        <DialogContent sx={{ overflow: "hidden" }}>
                           {[
                             { key: "group1", value: "Bharat-Manoj" },
                             { key: "group2", value: "Bharat-pranay" },
                             { key: "group3", value: "pranay-Manoj" },
                             { key: "group4", value: "srineevas-Manoj" },
-                           
                           ].map((item) => (
-                            <Grid key={item.key} sx={{ ml: 2}}>
+                            <Grid key={item.key} sx={{ ml: 2 }}>
                               <FormControlLabel
-                              
                                 control={
                                   <Checkbox
                                     checked={selectedValues.includes(
@@ -528,13 +541,11 @@ const DataList = () => {
                                     )}
                                     onChange={handleChange}
                                     value={item.value}
-                                    sx={{padding:'1em',pl:'1.5em'}}
+                                    sx={{ padding: "1em", pl: "1.5em" }}
                                   />
                                 }
                                 label={item.value}
-                              
                               />
-                              
                             </Grid>
                           ))}
                         </DialogContent>

@@ -15,7 +15,8 @@ export default function CardVariants() {
   const value = useLocation();
   const data = value.state;
   const keys = Object.keys(data);
-
+  console.log(data);
+  
   return (
     <>
       <Button

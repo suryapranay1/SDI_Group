@@ -11,6 +11,8 @@ import AccordionItemComponent from './components/mapaccord';
 import CheckboxList from './components/checkbox';
 import LandingAccord from './components/Saccro';
 import CardVariants from './components/meta-data-card';
+import InputFormProps from './components/dataEdit';
+
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   return (
@@ -24,6 +26,7 @@ function App() {
             <Route path="" element={<DataList />} />
           </Route>
           <Route path='/metaData' element={<CardVariants/>}/>
+          <Route path='/editData' element={<InputFormProps/>}/>
         </Routes>
         </BrowserRouter>
         {/* <BrowserRouter>
