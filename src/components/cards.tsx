@@ -130,6 +130,8 @@ const DataList = () => {
           </Grid> */}
         <Grid xs="auto">
           {cardData.map((data, index) => (
+          // if (data.levelofsharing === "admin") {
+          // return (
             <Card
               variant="outlined"
               key={index}
@@ -473,43 +475,7 @@ const DataList = () => {
                     >
                       <EditOutlinedIcon />
                     </Button>)}
-                    <Modal
-                      open={openEdit}
-                      onClose={() => setEdit(false)}
-                      slots={{ backdrop: Backdrop }}
-                      slotProps={{
-                        backdrop: {
-                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
-                        },
-                      }}
-                    >
-                      <ModalDialog variant="outlined" role="dialog">
-                        <DialogTitle>
-                          <WarningRoundedIcon />
-                          Confirmation
-                        </DialogTitle>
-                        <Divider />
-                        <DialogContent>
-                          Are you sure you want to edit the metadata?
-                        </DialogContent>
-                        <DialogActions>
-                          <Button
-                            variant="solid"
-                            color="primary"
-                            onClick={() =>{ setEdit(false); naviagate("/editData", { state: data });}}
-                          >
-                            edit
-                          </Button>
-                          <Button
-                            variant="plain"
-                            color="neutral"
-                            onClick={() => setEdit(false)}
-                          >
-                            Cancel
-                          </Button>
-                        </DialogActions>
-                      </ModalDialog>
-                    </Modal>
+
                     <Modal
                       open={editShare}
                       onClose={() => {
@@ -577,6 +543,7 @@ const DataList = () => {
                 </Box>
               </Stack>
             </Card>
+          // );}
           ))}
         </Grid>
       </Grid>

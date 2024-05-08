@@ -101,7 +101,7 @@ export default function InputFormProps() {
               disabled
               defaultValue={data.DateCreated}
               size="md"
-              sx={{ width: "600px", overflowY: "scroll" }}
+              sx={{ width: "600px"}}
             />
             <FormLabel>Date Last Modified</FormLabel>
             <Input
