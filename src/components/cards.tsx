@@ -475,7 +475,52 @@ const DataList = () => {
                     >
                       <EditOutlinedIcon />
                     </Button>)}
-
+                    <Modal
+                      open={openEdit}
+                      onClose={() => setEdit(false)}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>
+                          <WarningRoundedIcon />
+                          Confirmation
+                        </DialogTitle>
+                        <Divider />
+                        <DialogContent>
+                          Are you sure you want to edit your metadata?
+                        </DialogContent>
+                        <DialogActions>
+                          <Button
+                            variant="outlined"
+                            sx={{
+                              color: "black",
+                              "&:hover": {
+                                backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                cursor: "pointer",
+                              },
+                            }}
+                            onClick={() => {
+                              setEdit(false);
+                              naviagate("/editData", { state: data })
+                            }}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="plain"
+                            color="neutral"
+                            onClick={() => setEdit(false)}
+                          >
+                            Cancel
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
                     <Modal
                       open={editShare}
                       onClose={() => {

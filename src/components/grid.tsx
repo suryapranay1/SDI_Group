@@ -13,6 +13,7 @@ import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
 import { TabPanel } from "@mui/joy";
+import GroupAppBar from "./group-header";
 interface ListItem {
   key: string;
   value: string;
@@ -117,7 +118,7 @@ export default function BasicGrid() {
       </Grid>
       </TabPanel>
       <TabPanel value={1} sx={{padding:'none',margin:'none'}}>
-      <ButtonAppBar />
+      <GroupAppBar />
       <Grid container spacing={0.3} sx={{ flexGrow: 1, height: "100%" }}>
         <Grid xs={2}>
           <Item variant="plain">
