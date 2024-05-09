@@ -14,6 +14,7 @@ import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
 import { TabPanel } from "@mui/joy";
 import GroupAppBar from "./group-header";
+import GroupList from "./group-cards";
 interface ListItem {
   key: string;
   value: string;
@@ -148,7 +149,7 @@ export default function BasicGrid() {
         </Grid>
         <Grid xs={10}>
           <Item>
-            <Outlet />
+            <GroupList/>
           </Item>
         </Grid>
       </Grid>
