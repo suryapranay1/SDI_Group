@@ -63,7 +63,7 @@ const groups: Group[] = [
   { value: "group14", label: "Group 14" },
 ];
 
-export default function ButtonAppBar() {
+export default function GroupAppBar() {
   const [showGroupSelect, setShowGroupSelect] = React.useState(false);
   const [open, setOpen] = React.useState<boolean>(false);
   const [openEdit, setEdit] = React.useState<boolean>(false);

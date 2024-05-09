@@ -5,13 +5,14 @@ import Stack from "@mui/joy/Stack";
 import Box from "@mui/joy/Box";
 import Grid from "@mui/joy/Grid";
 import AccordionIndicator from "./filter";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import ButtonAppBar from "./tabchild";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { useState } from "react";
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
+import { TabPanel } from "@mui/joy";
 interface ListItem {
   key: string;
   value: string;
@@ -38,12 +39,10 @@ export default function BasicGrid() {
     const newSelectedValues = [...selectedValues];
 
     if (checked) {
-      // Add the value if checked
       if (!newSelectedValues.includes(value)) {
         newSelectedValues.push(value);
       }
     } else {
-      // Remove the value if unchecked
       const index = newSelectedValues.indexOf(value);
       if (index > -1) {
         newSelectedValues.splice(index, 1);
@@ -55,8 +54,8 @@ export default function BasicGrid() {
   };
   return (
     <>
-      <Grid style={{ width: '100%', display: 'flex', justifyContent:'space-evenly',backgroundColor: '#71ab8d', }}>
-      <Tabs aria-label="tabs" defaultValue={0} sx={{ bgcolor: 'secondary',}}>
+    
+      <Tabs aria-label="tabs" defaultValue={0} sx={{ bgcolor: 'secondary',"--Tabs-spacing": "0px"}}>
         <TabList
           disableUnderline
           sx={{
@@ -76,13 +75,12 @@ export default function BasicGrid() {
             },
           }}
         >
-          <Tab disableIndicator sx={{fontWeight:500}}>My Content</Tab>
+          <Tab disableIndicator sx={{fontWeight:500}} >  My Content</Tab>
           <Tab disableIndicator sx={{fontWeight:500}}>Groups</Tab>
           <Tab disableIndicator sx={{fontWeight:500}}>Organisation</Tab>
           <Tab disableIndicator sx={{fontWeight:500}}>Public</Tab>
         </TabList>
-      </Tabs>
-    </Grid>
+    <TabPanel value={0} sx={{padding:'none',margin:'none'}}>
       <ButtonAppBar />
       <Grid container spacing={0.3} sx={{ flexGrow: 1, height: "100%" }}>
         <Grid xs={2}>
@@ -117,6 +115,50 @@ export default function BasicGrid() {
           </Item>
         </Grid>
       </Grid>
+      </TabPanel>
+      <TabPanel value={1} sx={{padding:'none',margin:'none'}}>
+      <ButtonAppBar />
+      <Grid container spacing={0.3} sx={{ flexGrow: 1, height: "100%" }}>
+        <Grid xs={2}>
+          <Item variant="plain">
+            <Box sx={{ width: "100%", backgroundColor: "none" }}>
+              <Stack spacing={2}>
+                <Item sx={{ textAlign: "center" }}>Filters</Item>
+                <Grid sx={{ ml: "0" }}><b>Filter By type</b></Grid>
+                {typeList.map((item) => (
+                  <Grid key={item.key} sx={{ ml: 2 }}>
+                      <FormControlLabel
+                      control={
+                        <Checkbox
+                        size="small"
+                          checked={selectedValues.includes(item.value)}
+                          onChange={handleChange}
+                          value={item.value}
+                          sx={{padding:'0.3em',pl:'1.5em'}}
+                        />
+                      }
+                      label={item.value}
+                    />
+                  </Grid>
+                ))}
+              </Stack>
+            </Box>
+          </Item>
+        </Grid>
+        <Grid xs={10}>
+          <Item>
+            <Outlet />
+          </Item>
+        </Grid>
+      </Grid>
+      </TabPanel>
+      <TabPanel value={2}>
+        <b>Third</b> tab panel
+      </TabPanel>
+      <TabPanel value={3}>
+        <b>Third</b> tab panel
+      </TabPanel>
+      </Tabs>
     </>
   );
 }
