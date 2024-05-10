@@ -12,6 +12,7 @@ import CheckboxList from './components/checkbox';
 import LandingAccord from './components/Saccro';
 import CardVariants from './components/meta-data-card';
 import InputFormProps from './components/dataEdit';
+import GroupModal from './components/GroupModal';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <Route path='/metaData' element={<CardVariants/>}/>
           <Route path='/editData' element={<InputFormProps/>}/>
+          <Route path='/groupData' element={<GroupModal/>}/>
         </Routes>
         </BrowserRouter>
         {/* <BrowserRouter>

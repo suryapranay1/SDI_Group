@@ -39,6 +39,7 @@ const cardData = [
     NoOfGroupMembers: "10",
     DateCreated: "3/1/2024",
     dateLastModified: "2/3/2024",
+    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
   },
   {
     GroupName: "GROUP2",
@@ -46,6 +47,7 @@ const cardData = [
     DateCreated: "3/2/2024",
     NoOfGroupMembers: "10",
     dateLastModified: "3/2/2024",
+    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
   },
   {
     GroupName: "GROUP3",
@@ -53,6 +55,7 @@ const cardData = [
     NoOfGroupMembers: "10",
     DateCreated: "4/2/2024",
     dateLastModified: "5/2/2024",
+    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
   },
   {
     GroupName: "GROUP4",
@@ -60,6 +63,7 @@ const cardData = [
     NoOfGroupMembers: "10",
     DateCreated: "6/2/2024",
     dateLastModified: "7/2/2024",
+    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
   },
   {
     GroupName: "GROUP5",
@@ -67,6 +71,7 @@ const cardData = [
     NoOfGroupMembers: "10",
     DateCreated: "8/2/2024",
     dateLastModified: "3/2/2024",
+    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
   },
 ];
 const userGroupName = "Bharat";
@@ -127,7 +132,7 @@ const GroupList = () => {
                   <StorageIcon sx={{ mr: "1em", mt: "0.2em" }} />
                   <Button
                     sx={{
-                      backgroundColor: "#458844ba",
+                      backgroundColor: "Limegreen",
                       color: "white",
                       "&:hover": {
                         backgroundColor: "#a2bc69",
@@ -135,7 +140,7 @@ const GroupList = () => {
                       },
                     }}
                     onClick={() => {
-                      naviagate("/metaData", { state: data });
+                      naviagate("/groupData",{state:data});
                     }}
                   >
                     <Typography>

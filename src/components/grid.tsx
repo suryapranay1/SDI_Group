@@ -34,6 +34,14 @@ const typeList: ListItem[] = [
   { key: "Type3", value: "CSV" },
 ];
 
+const groupSize: ListItem[] = [
+  { key: "size1", value: "<5" },
+  { key: "size2", value: "<10",},
+  { key: "size3", value: "<50" },
+];
+
+
+
 export default function BasicGrid() {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,6 +136,23 @@ export default function BasicGrid() {
                 <Item sx={{ textAlign: "center" }}>Filters</Item>
                 <Grid sx={{ ml: "0" }}><b>Filter By type</b></Grid>
                 {typeList.map((item) => (
+                  <Grid key={item.key} sx={{ ml: 2 }}>
+                      <FormControlLabel
+                      control={
+                        <Checkbox
+                        size="small"
+                          checked={selectedValues.includes(item.value)}
+                          onChange={handleChange}
+                          value={item.value}
+                          sx={{padding:'0.3em',pl:'1.5em'}}
+                        />
+                      }
+                      label={item.value}
+                    />
+                  </Grid>
+                ))}
+                <Grid sx={{ ml: "0" }}><b>Filter By Group Size</b></Grid>
+                {groupSize.map((item) => (
                   <Grid key={item.key} sx={{ ml: 2 }}>
                       <FormControlLabel
                       control={
