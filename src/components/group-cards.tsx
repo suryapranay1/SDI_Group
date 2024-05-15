@@ -34,44 +34,92 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
 const cardData = [
   {
-    GroupName: "GROUP1",
+    GroupName: "Group1",
     GroupOwner: "Owner1",
     NoOfGroupMembers: "10",
     DateCreated: "3/1/2024",
     dateLastModified: "2/3/2024",
-    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
+    member: [
+      ["member1", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member2", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member3", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member4", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member7", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member8", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member9", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member10", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member11", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member12", "2/3/2024", "2/3/2024", "GCRS"],
+    ],
+    Data:[["al609_mic_metadata1","Owner1","3/2/2024","2/3/2024"],
+    ["bl609_mic_metadata","Owner1","3/2/2024","2/3/2024"],
+    ["cl609_mic_metadata","Owner2","3/1/2023","2/4/2024"],
+    ["dl609_mic_metadata","Owner3","3/2/2023","2/5/2024"],
+    ["el609_mic_metadata","Owner4","3/1/2022","12/6/2024"],
+    ["fl609_mic_metadata","Owner5","3/1/2021","10/6/2024"]
+  ],
   },
   {
-    GroupName: "GROUP2",
+    GroupName: "Group2",
     GroupOwner: "Owner2",
     DateCreated: "3/2/2024",
     NoOfGroupMembers: "10",
     dateLastModified: "3/2/2024",
-    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
+    member: [
+      ["member1", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member2", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member3", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member4", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
+    ],
   },
   {
-    GroupName: "GROUP3",
+    GroupName: "Group3",
     GroupOwner: "Owner3",
     NoOfGroupMembers: "10",
     DateCreated: "4/2/2024",
     dateLastModified: "5/2/2024",
-    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
+    member: [
+      ["member1", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member2", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member3", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member4", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
+    ],
   },
   {
-    GroupName: "GROUP4",
+    GroupName: "Group4",
     GroupOwner: "Owner4",
     NoOfGroupMembers: "10",
     DateCreated: "6/2/2024",
     dateLastModified: "7/2/2024",
-    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
+    member: [
+      ["member1", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member2", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member3", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member4", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
+    ],
   },
   {
-    GroupName: "GROUP5",
+    GroupName: "Group5",
     GroupOwner: "Owner5",
     NoOfGroupMembers: "10",
     DateCreated: "8/2/2024",
     dateLastModified: "3/2/2024",
-    member:['memeber1','memeber2','memeber3','memeber4','memeber5','memeber6']
+    member: [
+      ["member1", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member2", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member3", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member4", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
+      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
+    ],
   },
 ];
 const userGroupName = "Bharat";
@@ -108,8 +156,8 @@ const GroupList = () => {
     <Stack marginLeft={"2rem"}>
       <Grid container spacing={1}>
         {/* <Grid md={1} xs="auto">
-              <Divider orientation="vertical" />
-            </Grid> */}
+                <Divider orientation="vertical" />
+              </Grid> */}
         <Grid xs="auto">
           {cardData.map((data, index) => (
             // if (data.levelofsharing === "admin") {
@@ -132,7 +180,7 @@ const GroupList = () => {
                   <StorageIcon sx={{ mr: "1em", mt: "0.2em" }} />
                   <Button
                     sx={{
-                      backgroundColor: "Limegreen",
+                      backgroundColor: "#458844ba",
                       color: "white",
                       "&:hover": {
                         backgroundColor: "#a2bc69",
@@ -140,7 +188,7 @@ const GroupList = () => {
                       },
                     }}
                     onClick={() => {
-                      naviagate("/groupData",{state:data});
+                      naviagate("/groupData", { state: data });
                     }}
                   >
                     <Typography>
@@ -231,7 +279,60 @@ const GroupList = () => {
                               Revert
                             </Button>
                           </Box>
-
+                          <RadioGroup
+                            aria-label="Your plan"
+                            name="people"
+                            defaultValue="Individual"
+                          >
+                            <List
+                              sx={{
+                                minWidth: 240,
+                                "--List-gap": "0.5rem",
+                                "--ListItem-paddingY": "1rem",
+                                "--ListItem-radius": "8px",
+                                "--ListItemDecorator-size": "32px",
+                              }}
+                            >
+                              {[
+                                "Owner (owner of the item has access)",
+                                "Organisation (All members of your organisation has access)",
+                                "Everyone(public)",
+                              ].map((item, index) => (
+                                <ListItem
+                                  variant="outlined"
+                                  key={item}
+                                  sx={{ boxShadow: "sm" }}
+                                >
+                                  <ListItemDecorator>
+                                    {
+                                      [
+                                        <Person />,
+                                        <Apartment />,
+                                        <PublicIcon />,
+                                      ][index]
+                                    }
+                                  </ListItemDecorator>
+                                  <Radio
+                                    overlay
+                                    color="success"
+                                    value={item}
+                                    label={item}
+                                    slotProps={{
+                                      action: ({ checked }) => ({
+                                        sx: (theme) => ({
+                                          ...(checked && {
+                                            inset: -1,
+                                            border: "2px solid",
+                                            borderColor: "green",
+                                          }),
+                                        }),
+                                      }),
+                                    }}
+                                  />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </RadioGroup>
                           <Divider />
                           <Typography component="h6">
                             Set group sharing
@@ -405,7 +506,52 @@ const GroupList = () => {
                         <EditOutlinedIcon />
                       </Button>
                     )}
-
+                    <Modal
+                      open={openEdit}
+                      onClose={() => setEdit(false)}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(341, 0%, 94%, 0.4)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>
+                          <WarningRoundedIcon />
+                          Confirmation
+                        </DialogTitle>
+                        <Divider />
+                        <DialogContent>
+                          Are you sure you want to edit your metadata?
+                        </DialogContent>
+                        <DialogActions>
+                          <Button
+                            variant="outlined"
+                            sx={{
+                              color: "black",
+                              "&:hover": {
+                                backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
+                                cursor: "pointer",
+                              },
+                            }}
+                            onClick={() => {
+                              setEdit(false);
+                              naviagate("/editData", { state: data });
+                            }}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="plain"
+                            color="neutral"
+                            onClick={() => setEdit(false)}
+                          >
+                            Cancel
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
                     <Modal
                       open={editShare}
                       onClose={() => {
@@ -423,10 +569,10 @@ const GroupList = () => {
                         <Divider />
                         <DialogContent sx={{ overflow: "hidden" }}>
                           {[
-                            { key: "group1", value: "Bharat-Manoj" },
-                            { key: "group2", value: "Bharat-pranay" },
-                            { key: "group3", value: "pranay-Manoj" },
-                            { key: "group4", value: "srineevas-Manoj" },
+                            { key: "group1", value: "Group1" },
+                            { key: "group2", value: "Group2" },
+                            { key: "group3", value: "Group3" },
+                            { key: "group4", value: "Group4" },
                           ].map((item) => (
                             <Grid key={item.key} sx={{ ml: 2 }}>
                               <FormControlLabel
@@ -453,18 +599,17 @@ const GroupList = () => {
 
               <Stack direction={"row"} alignItems={"center"} gap={2}>
                 <Box></Box>
-                <Box sx={{display:'flex'}}>
-                  <Box >
+                <Box sx={{ display: "flex" }}>
+                  <Box>
                     <Typography>
                       Name Of Owner : <b>{data.GroupOwner}</b>
                     </Typography>
                     <Typography>
                       Date Created : <b>{data.DateCreated}</b>
                     </Typography>
-                    
                   </Box>
-                  <Box sx={{ml:'10em'}}>
-                  <Typography>
+                  <Box sx={{ ml: "10em" }}>
+                    <Typography>
                       No Of Group Members : <b>{data.NoOfGroupMembers}</b>
                     </Typography>
                     <Typography>
