@@ -16,6 +16,21 @@ import { height } from "@mui/system";
 export default function CardGroup() {
   const value = useLocation();
   const data = value.state;
+  const [addMem, setAddMem] = React.useState(false);
+  const [showAlert, setShowAlert] = React.useState(false);
+  React.useEffect(() => {
+    let timeoutId: string | number | NodeJS.Timeout | undefined;
+
+    if (showAlert) {
+      timeoutId = setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [showAlert]);
   
   console.log(data);  
   const CustomTab = styled(Tab)({
@@ -135,7 +150,8 @@ export default function CardGroup() {
             <tfoot >
               <tr>
                 <td colSpan={4} style={{textAlign:'end'}}>
-            <Button color="success" >Invite members</Button>
+            <Button color="success" onClick={() => setAddMem(true)} >Invite members</Button>
+            
             </td>
             </tr>
             </tfoot>
