@@ -63,7 +63,7 @@ const groups: Group[] = [
   { value: "group14", label: "Group 14" },
 ];
 
-export default function ButtonAppBar() {
+export default function GroupAddBar() {
   const [showGroupSelect, setShowGroupSelect] = React.useState(false);
   const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
   const [upload, toggleUpload] = React.useState(false);

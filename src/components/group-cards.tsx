@@ -20,7 +20,7 @@ import DeleteForever from "@mui/icons-material/DeleteForever";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import { Backdrop, FormControlLabel } from "@mui/material";
+import { Backdrop, CardActionAreaClassKey, FormControlLabel } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
@@ -32,8 +32,22 @@ import Apartment from "@mui/icons-material/Apartment";
 import PublicIcon from "@mui/icons-material/Public";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
-const cardData = [
+interface CardData {
+  id: number;
+  GroupName: string;
+  GroupOwner: string;
+  NoOfGroupMembers: string;
+  DateCreated: string;
+  dateLastModified: string;
+  member: string[][];
+  Data?: string[][];
+}
+
+
+
+const cardData:CardData[] = [
   {
+    id: 1,
     GroupName: "Group1",
     GroupOwner: "Owner1",
     NoOfGroupMembers: "10",
@@ -53,15 +67,17 @@ const cardData = [
       ["member11", "2/3/2024", "2/3/2024", "GCRS"],
       ["member12", "2/3/2024", "2/3/2024", "GCRS"],
     ],
-    Data:[["al609_mic_metadata1","Owner1","3/2/2024","2/3/2024"],
-    ["bl609_mic_metadata","Owner1","3/2/2024","2/3/2024"],
-    ["cl609_mic_metadata","Owner2","3/1/2023","2/4/2024"],
-    ["dl609_mic_metadata","Owner3","3/2/2023","2/5/2024"],
-    ["el609_mic_metadata","Owner4","3/1/2022","12/6/2024"],
-    ["fl609_mic_metadata","Owner5","3/1/2021","10/6/2024"]
-  ],
+    Data: [
+      ["al609_mic_metadata1", "Owner1", "3/2/2024", "2/3/2024"],
+      ["bl609_mic_metadata", "Owner1", "3/2/2024", "2/3/2024"],
+      ["cl609_mic_metadata", "Owner2", "3/1/2023", "2/4/2024"],
+      ["dl609_mic_metadata", "Owner3", "3/2/2023", "2/5/2024"],
+      ["el609_mic_metadata", "Owner4", "3/1/2022", "12/6/2024"],
+      ["fl609_mic_metadata", "Owner5", "3/1/2021", "10/6/2024"],
+    ],
   },
   {
+    id: 2,
     GroupName: "Group2",
     GroupOwner: "Owner2",
     DateCreated: "3/2/2024",
@@ -72,11 +88,10 @@ const cardData = [
       ["member2", "2/3/2024", "2/3/2024", "GCRS"],
       ["member3", "2/3/2024", "2/3/2024", "GCRS"],
       ["member4", "2/3/2024", "2/3/2024", "GCRS"],
-      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
-      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
     ],
   },
   {
+    id: 3,
     GroupName: "Group3",
     GroupOwner: "Owner3",
     NoOfGroupMembers: "10",
@@ -92,6 +107,7 @@ const cardData = [
     ],
   },
   {
+    id: 4,
     GroupName: "Group4",
     GroupOwner: "Owner4",
     NoOfGroupMembers: "10",
@@ -107,6 +123,7 @@ const cardData = [
     ],
   },
   {
+    id: 5,
     GroupName: "Group5",
     GroupOwner: "Owner5",
     NoOfGroupMembers: "10",
@@ -116,9 +133,6 @@ const cardData = [
       ["member1", "2/3/2024", "2/3/2024", "GCRS"],
       ["member2", "2/3/2024", "2/3/2024", "GCRS"],
       ["member3", "2/3/2024", "2/3/2024", "GCRS"],
-      ["member4", "2/3/2024", "2/3/2024", "GCRS"],
-      ["member5", "2/3/2024", "2/3/2024", "GCRS"],
-      ["member6", "2/3/2024", "2/3/2024", "GCRS"],
     ],
   },
 ];
@@ -130,10 +144,24 @@ const GroupList = () => {
   const [openShare, setShare] = React.useState<boolean>(false);
   const [editShare, setEditShare] = React.useState<boolean>(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [modUser, setModUser] = useState<boolean>(false);
+  const [selectedDataItem, setSelectedDataItem] = useState<CardData | null>(
+    null
+  );
+  const [modData, SetModData] = useState<boolean>(false);
+  const handleOpenUserMod = (dataIndex: number) => {
+    setEdit(true);
+    setSelectedDataItem(cardData[dataIndex]);
+  };
+  const handleCloseUserMod = () => {
+    setModUser(false);
+    setSelectedDataItem(null);
+  };
 
   const naviagate = useNavigate();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;
+
     const newSelectedValues = [...selectedValues];
 
     if (checked) {
@@ -148,7 +176,6 @@ const GroupList = () => {
         newSelectedValues.splice(index, 1);
       }
     }
-    console.log(newSelectedValues);
 
     setSelectedValues(newSelectedValues);
   };
@@ -210,7 +237,7 @@ const GroupList = () => {
                         }}
                         onClick={() => setShare(true)}
                       >
-                        <IosShareIcon />
+                        {/* <IosShareIcon /> */}
                       </Button>
                     )}
                     <Modal
@@ -501,14 +528,14 @@ const GroupList = () => {
                       <Button
                         variant="plain"
                         color="primary"
-                        onClick={() => setEdit(true)}
+                        onClick={() =>  handleOpenUserMod(index) }
                       >
                         <EditOutlinedIcon />
                       </Button>
                     )}
                     <Modal
                       open={openEdit}
-                      onClose={() => setEdit(false)}
+                      onClose={()=>setEdit(false)}
                       slots={{ backdrop: Backdrop }}
                       slotProps={{
                         backdrop: {
@@ -519,29 +546,23 @@ const GroupList = () => {
                       <ModalDialog variant="outlined" role="alertdialog">
                         <DialogTitle>
                           <WarningRoundedIcon />
-                          Confirmation
+                          Modify
                         </DialogTitle>
                         <Divider />
                         <DialogContent>
-                          Are you sure you want to edit your metadata?
+                          which of the following do you want to modify?
                         </DialogContent>
                         <DialogActions>
                           <Button
-                            variant="outlined"
-                            sx={{
-                              color: "black",
-                              "&:hover": {
-                                backgroundColor: "hsla(45, 3%, 85%, 1)", // Customize hover background color
-                                cursor: "pointer",
-                              },
-                            }}
                             onClick={() => {
-                              setEdit(false);
-                              naviagate("/editData", { state: data });
+                            setModUser(true)
                             }}
                           >
-                            Edit
+                            Modify User
                           </Button>
+                          
+                          <Button >Modify Data</Button>
+
                           <Button
                             variant="plain"
                             color="neutral"
@@ -549,6 +570,42 @@ const GroupList = () => {
                           >
                             Cancel
                           </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
+                    <Modal
+                      open={modUser}
+                      onClose={handleCloseUserMod}
+                      slots={{ backdrop: Backdrop }}
+                      slotProps={{
+                        backdrop: {
+                          sx: { backgroundColor: "hsla(175, 100%, 100%, 0.3)" },
+                        },
+                      }}
+                    >
+                      <ModalDialog variant="outlined" role="alertdialog">
+                        <DialogTitle>List Of Shared Groups</DialogTitle>
+
+                        <Divider />
+                        <DialogContent sx={{ overflow: "scroll" }}>
+                          {selectedDataItem?.member.map((item, index1) => (
+                            <Grid key={index1} sx={{ ml: 2 }}>
+                              <FormControlLabel
+                                control={
+                                  <Checkbox 
+                                    checked={selectedValues.includes(item[0])}
+                                    onChange={handleChange}
+                                    value={item[0]}
+                                    sx={{ padding: "1em", pl: "1.5em" }}
+                                  />
+                                }
+                                label={item[0]}
+                              />
+                            </Grid>
+                          ))}
+                        </DialogContent>
+                        <DialogActions>
+                          <Button>Save</Button>
                         </DialogActions>
                       </ModalDialog>
                     </Modal>

@@ -58,7 +58,6 @@ export default function BasicGrid() {
         newSelectedValues.splice(index, 1);
       }
     }
-    console.log(newSelectedValues);
 
     setSelectedValues(newSelectedValues);
   };

@@ -118,7 +118,7 @@ const DataList = () => {
         newSelectedValues.splice(index, 1);
       }
     }
-    console.log(newSelectedValues);
+    
 
     setSelectedValues(newSelectedValues);
   };

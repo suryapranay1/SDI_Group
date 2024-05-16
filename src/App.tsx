@@ -19,18 +19,18 @@ function App() {
   return (
 
       <>
-        <BrowserRouter>
-        <Routes>
+  <BrowserRouter>
+  <Routes>
 
-          <Route path="/" element={<BasicGrid />}>
-            <Route path="/list" element={<DataTable />} />
-            <Route path="" element={<DataList />} />
-          </Route>
-          <Route path='/metaData' element={<CardVariants/>}/>
-          <Route path='/editData' element={<InputFormProps/>}/>
-          <Route path='/groupData' element={<GroupModal/>}/>
-        </Routes>
-        </BrowserRouter>
+    <Route path="/" element={<BasicGrid />}>
+      <Route path="/list" element={<DataTable />} />
+      <Route path="" element={<DataList />} />
+    </Route>
+    <Route path='/metaData' element={<CardVariants/>}/>
+    <Route path='/editData' element={<InputFormProps/>}/>
+    <Route path='/groupData' element={<GroupModal/>}/>
+  </Routes>
+  </BrowserRouter>
         {/* <BrowserRouter>
         <Routes>
           <Route path='/' element={<AccordionItemComponent sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}>
