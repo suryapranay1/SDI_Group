@@ -1,12 +1,10 @@
 import * as React from "react";
 import Button from "@mui/joy/Button";
 import Input from "@mui/joy/Input";
-
 import {
   Box,
   Checkbox,
   Container,
-
   FormControl,
   FormLabel,
   List,
@@ -17,14 +15,11 @@ import {
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Select } from "@mui/joy";
 import { FormGroup } from "@mui/material";
-
 const userName = "bharat";
-
 interface Group {
   value: string;
   label: string;
 }
-
 const groups: Group[] = [
   { value: "group1", label: "Group 1" },
   { value: "group2", label: "Group 2" },
@@ -41,26 +36,18 @@ const groups: Group[] = [
   { value: "group13", label: "Group 13" },
   { value: "group14", label: "Group 14" },
 ];
-
 export default function InputFormProps() {
-  const navigate = useNavigate();
-  const value = useLocation();
-  const data = value.state;
-  console.log(data);
-  const [showGroupSelect, setShowGroupSelect] = React.useState(false);
-
-
-//   const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
-
-
-  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
-
-  const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const updatedSelectedValues = selectedValues.includes(value)
-      ? selectedValues.filter((v) => v !== value)
+const navigate = useNavigate();
+const value = useLocation();
+const data = value.state;
+console.log(data);
+const [showGroupSelect, setShowGroupSelect] = React.useState(false);
+const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
+const handleChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+const value = event.target.value;
+const updatedSelectedValues = selectedValues.includes(value)? selectedValues.filter((v) => v !== value)
       : [...selectedValues, value];
-    setSelectedValues(updatedSelectedValues);
+ setSelectedValues(updatedSelectedValues);
   };
 
   return (

@@ -100,12 +100,10 @@ const DataList = () => {
   const [openShare, setShare] = React.useState<boolean>(false);
   const [editShare, setEditShare] = React.useState<boolean>(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
   const naviagate = useNavigate();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;
     const newSelectedValues = [...selectedValues];
-
     if (checked) {
       // Add the value if checked
       if (!newSelectedValues.includes(value)) {
@@ -118,8 +116,6 @@ const DataList = () => {
         newSelectedValues.splice(index, 1);
       }
     }
-    
-
     setSelectedValues(newSelectedValues);
   };
   return (

@@ -1,19 +1,24 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
-import { Checkbox, FormControlLabel, Grid, ListItemButton, Typography } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
 import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface ListItem {
   key: string;
   value: string;
 }
-
 const CheckboxList = () => {
   const navigate = useNavigate();
   // const { selectedKeys } = useParams();
-  const value=useLocation();
-  const selectedKeys=value.state;
+  const value = useLocation();
+  const selectedKeys = value.state;
   const selectedArray = selectedKeys?.split(",");
   const firstelement = selectedArray?.slice(0)[0];
   const secondelement = selectedArray?.slice(1)[0];
@@ -21,9 +26,6 @@ const CheckboxList = () => {
   const bread1 = selectedArray?.slice(3)[0];
   const bread2 = selectedArray?.slice(4)[0];
   const bread3 = selectedArray?.slice(5)[0];
-  // console.log(lastElement);
-  // console.log(firstelement);
-  // console.log(secondelement);
   console.log(selectedArray);
   const getSelectedArray = (): { key: string; value: string }[] => {
     switch (thirdelement) {
@@ -89,26 +91,21 @@ const CheckboxList = () => {
       value: "Vegetation Indices, Monthly, Sentinel-2",
     },
   ];
-
   const ground: ListItem[] = [
     { key: "soils-organic", value: "Soils, Organic Matter" },
     { key: "geology", value: "Geology, Tectonics And Ice Margins" },
   ];
-
   const energy: ListItem[] = [
     { key: "opencastmining", value: "Opencast Mining And Pits" },
     { key: "hydropower", value: "Hydropower" },
   ];
-
   const natureconversation: ListItem[] = [
     { key: "biosphere", value: "Protected Area Biosphere Reserves" },
     { key: "landscapearea", value: "Protected Area Protected Landscape Areas" },
   ];
-
   const environmentalwater: ListItem[] = [
     { key: "biological-water", value: "Water, Biological Water Quality" },
   ];
-
   const environmentalair: ListItem[] = [
     { key: "air-ozone", value: "Air, Ozone, Human Health" },
     { key: "ozone-plants", value: "Air, Ozone, Plants Aot40" },
@@ -118,9 +115,6 @@ const CheckboxList = () => {
       value: "Vegetation Indices, Monthly, Sentinel-2",
     },
   ];
-
-  /* population*/
-
   const SocietyAndHealth: ListItem[] = [
     { key: "gender-ratio", value: "Gender Ratio" },
     { key: "le-women", value: "Life Expectancy For Women" },
@@ -128,17 +122,12 @@ const CheckboxList = () => {
     { key: "tajkistan-pop", value: "Tajikistan Pop Data" },
     { key: "population-density", value: "Tajikistan Pop Data" },
   ];
-
   const hospitalCare: ListItem[] = [
     { key: "hosiptal-beds", value: "Hospital Beds" },
   ];
-
   const environmentGround: ListItem[] = [
     { key: "soil-earthquake", value: "Soil, Earthquake, Historical Overview" },
   ];
-
-  /*Agriculture*/
-
   const AgricultureAndForesty: ListItem[] = [
     { key: "available-water", value: "Water available to plants in summer" },
     {
@@ -155,45 +144,30 @@ const CheckboxList = () => {
       value: "Vegetation Indices, Monthly, Sentinel-2",
     },
   ];
-
-  /*space and location*/
   const maps: ListItem[] = [{ key: "basemaps", value: "Base Maps" }];
-
   const satelliteImages: ListItem[] = [
     { key: "landsat", value: "Landsat Timescan Satellite, 2015, Global" },
     { key: "NIRE", value: "Sentinel-2 Satellite, Near Infrared Red Edge" },
     { key: "rgb", value: "Sentinel-2 Satellite, Rgb (True Colour)" },
     { key: "rgb-2", value: "Sentinel-2 Satellite, Rgb (True Colour)" },
   ];
-
-  /**/
-
   const flight: ListItem[] = [{ key: "airports", value: "Airports" }];
-
   const rail: ListItem[] = [
     { key: "railway", value: "RailwayStations, General" },
   ];
-
   const street: ListItem[] = [{ key: "streets", value: "Roads" }];
-
   const finance: ListItem[] = [
     {
       key: "finace",
       value: "Financial Assets Of The General Government Budget",
     },
   ];
-
   const Economy: ListItem[] = [
     { key: "unemployment", value: "Unemployment Rate" },
   ];
-
-  const floods: ListItem[] = [
-    { key: "flood", value: "Flood" },
-  ];
-
+  const floods: ListItem[] = [{ key: "flood", value: "Flood" }];
   const earthquake: ListItem[] = [{ key: "earthquake", value: "Earthquake" }];
   const landslides: ListItem[] = [{ key: "landslides", value: "Landslides" }];
-
   const weatherCurrent: ListItem[] = [
     { key: "pt", value: "Update Potential Evapotranspiration" },
     { key: "aq", value: "Air Quality From Ecmwf" },
@@ -201,11 +175,9 @@ const CheckboxList = () => {
   ];
   const empty: ListItem[] = [];
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;
     const newSelectedValues = [...selectedValues];
-
     if (checked) {
       // Add the value if checked
       if (!newSelectedValues.includes(value)) {
@@ -219,10 +191,8 @@ const CheckboxList = () => {
       }
     }
     console.log(newSelectedValues);
-
     setSelectedValues(newSelectedValues);
   };
-
   return (
     <>
       <Breadcrumbs
@@ -231,18 +201,28 @@ const CheckboxList = () => {
         size="sm"
         sx={{}}
       >
-      <ListItemButton onClick={()=>{navigate("/",{state:` , , `})}}>
+        <ListItemButton
+          onClick={() => {
+            navigate("/", { state: ` , , ` });
+          }}
+        >
           <Typography>Home</Typography>
-          </ListItemButton>
-          <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement}, ,`})}}>
-            <Typography>{bread1}</Typography>
-            </ListItemButton>
-          <ListItemButton onClick={()=>{navigate("/",{state:`${firstelement},${secondelement}, `})}}>
-            <Typography>{bread2}</Typography>
-          </ListItemButton>
-
-
-        <Typography sx={{fontWeight:'bold'}}>{bread3}</Typography>
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => {
+            navigate("/", { state: `${firstelement}, ,` });
+          }}
+        >
+          <Typography>{bread1}</Typography>
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => {
+            navigate("/", { state: `${firstelement},${secondelement}, ` });
+          }}
+        >
+          <Typography>{bread2}</Typography>
+        </ListItemButton>
+        <Typography sx={{ fontWeight: "bold" }}>{bread3}</Typography>
       </Breadcrumbs>
       {getSelectedArray().map((item) => (
         <Grid key={item.key} sx={{ ml: 2 }}>

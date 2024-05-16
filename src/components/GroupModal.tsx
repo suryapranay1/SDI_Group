@@ -3,7 +3,6 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import { Link, useLocation } from "react-router-dom";
 import { Table } from "@mui/joy";
-// import {Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import { Button, Tab, TabList,TabPanel,Tabs, styled } from "@mui/joy";
 import { Sheet } from "@mui/joy";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -49,7 +48,6 @@ export default function CardGroup() {
   const groupData = { ...data };
   if ('member' in groupData) {
     delete groupData.member;
-
   }
   if('Data'in groupData){
     delete groupData.Data;
@@ -83,14 +81,9 @@ export default function CardGroup() {
       </Button>
       <Sheet sx={{height:'100vh',width:'100vw',justifyContent:'center',alignContent:'flex-start'}}>
       <Tabs
-        // variant="soft"
-        
-        // aria-label="Placement indicator tabs"
         defaultValue="GroupInfo"
         sx={{
-
           alignItems:'center'
-          
         }}
       >
         <TabList sx={{alignSelf:'center'}}>
@@ -105,7 +98,6 @@ export default function CardGroup() {
           </CustomTab>
         </TabList>
         <TabPanel value="GroupInfo" sx={{height: 400,width:'45%',maxHeight: 400}}>
-        
           <Card variant="outlined">
             <CardContent>
               <Table>
@@ -169,10 +161,8 @@ export default function CardGroup() {
               <tr >
                 <th style={{width:'25%'}}>Data Name</th>
                 <th>Owner</th>
-
                 <th>Date Last Modified</th>
                 <th>Created</th>
-  
               </tr>
               <tbody >
                 {data2.map((Data, index) => (
