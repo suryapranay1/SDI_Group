@@ -12,9 +12,23 @@ import { useState } from "react";
 import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Tab, { tabClasses } from '@mui/joy/Tab';
-import { TabPanel } from "@mui/joy";
+import { FormLabel, Input, Select, TabPanel } from "@mui/joy";
 import GroupAppBar from "./group-header";
 import GroupList from "./group-cards";
+import AccordionGroup from '@mui/joy/AccordionGroup';
+import Accordion from '@mui/joy/Accordion';
+import AccordionDetails, {
+  accordionDetailsClasses,
+} from '@mui/joy/AccordionDetails';
+import AccordionSummary, {
+  accordionSummaryClasses,
+} from '@mui/joy/AccordionSummary';
+import { Button } from '@mui/joy';
+import TabsBasic from "./forms";
+import TabsBasic1 from "./forms1";
+import TabsBasic3 from "./forms3";
+import TabsBasic2 from "./forms2";
+import Valid from "./valid";
 interface ListItem {
   key: string;
   value: string;
@@ -44,6 +58,7 @@ const groupSize: ListItem[] = [
 
 export default function BasicGrid() {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;
     const newSelectedValues = [...selectedValues];
@@ -61,6 +76,7 @@ export default function BasicGrid() {
 
     setSelectedValues(newSelectedValues);
   };
+  
   return (
     <>
     
@@ -84,10 +100,14 @@ export default function BasicGrid() {
             },
           }}
         >
-          <Tab disableIndicator sx={{fontWeight:500}} >  My Content</Tab>
+          <Tab disableIndicator sx={{fontWeight:500}} >My Content</Tab>
           <Tab disableIndicator sx={{fontWeight:500}}>Groups</Tab>
           <Tab disableIndicator sx={{fontWeight:500}}>Organisation</Tab>
           <Tab disableIndicator sx={{fontWeight:500}}>Public</Tab>
+          <Tab disableIndicator sx={{fontWeight:500}}>Forms</Tab>
+          <Tab disableIndicator sx={{fontWeight:500}}>Forms</Tab>
+          <Tab disableIndicator sx={{fontWeight:500}}>Forms</Tab>
+          <Tab disableIndicator sx={{fontWeight:500}}>Forms</Tab>
         </TabList>
     <TabPanel value={0} sx={{padding:'none',margin:'none'}}>
       <ButtonAppBar />
@@ -183,6 +203,18 @@ export default function BasicGrid() {
       </TabPanel>
       <TabPanel value={3}>
         <b>Third</b> tab panel
+      </TabPanel>
+      <TabPanel sx={{backgroundColor:'white',display:'flex',flexDirection:'column',alignItems:'center'}} value={4}>
+        <TabsBasic/>
+      </TabPanel>
+      <TabPanel sx={{backgroundColor:'white',display:'flex',flexDirection:'column',alignItems:'center'}} value={5}>
+        <Valid/>
+      </TabPanel>
+      <TabPanel sx={{backgroundColor:'white',display:'flex',flexDirection:'column',alignItems:'center'}} value={6}>
+        <TabsBasic2/>
+      </TabPanel>
+      <TabPanel sx={{backgroundColor:'white',display:'flex',flexDirection:'column',alignItems:'center'}} value={7}>
+        <TabsBasic3/>
       </TabPanel>
       </Tabs>
     </>

@@ -9,7 +9,6 @@ import {
   TablePagination,
   Typography,
 } from '@mui/material';
-
 import { Stack } from '@mui/joy';
 import { useState } from 'react';
 const columns = [
@@ -29,9 +28,7 @@ const columns = [
     headerName: 'Date Modified',
     sortable: false,
   },
-
-
-  {
+{
     field: 'Description',
     headerName: 'Description',
     sortable: false,
@@ -44,7 +41,6 @@ const columns = [
     sortable: false,
   },
 ];
-
 const generateRandomTime = () => {
   const hours = Math.floor(Math.random() * 12);
   const minutes = Math.floor(Math.random() * 60);
@@ -75,7 +71,6 @@ const generateRandomRows = (numRows: number) => {
   }
   return rows;
 };
-
 export default function DataTable() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
@@ -85,16 +80,14 @@ export default function DataTable() {
   ) => {
     setPage(newPage);
   };
-
-  const handleChangeRowsPerPage = (
+const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
   const rows = generateRandomRows(10);
-
-  return (
+return (
     <Stack sx={{ height:'700', width: '80%', overflow: 'hidden' ,margin:'20px', ml:'8em'}}>
       <TableContainer sx={{ overflow: 'hidden'}} >
         <Table stickyHeader sx={{border:'1px solid #9a9c9b'}}>

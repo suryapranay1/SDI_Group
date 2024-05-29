@@ -13,8 +13,6 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { visuallyHidden } from '@mui/utils';
 import MenuIconSideNavExample from './filterbutton';
-import FormLabel from '@mui/joy/FormLabel';
-import { FormControl, Select } from '@mui/material';
 interface Data {
   name: string;
   DateModified: string;
@@ -22,10 +20,8 @@ interface Data {
   description: string;
   LeveLOfSharing: string;
 }
-
 function createData(
   name: string,
-  
   DateCreated: string,
   DateModified: string,
   description: string,
@@ -39,7 +35,6 @@ function createData(
     LeveLOfSharing,
   };
 }
-
 const rows = [
   createData('Map1','2019-01-16','2019-02-16','GCRS MAP1','Low'),
   createData('Map2','2019-01-17','2019-03-16','GCRS MAP1','High'),
@@ -52,7 +47,6 @@ const rows = [
   createData('Map9','2019-01-24','2019-01-13','GCRS MAP8','High'),
   createData('Map10','2019-01-25','2019-01-17','GCRS MAP9','High'),
   createData('Map11','2019-01-26','2019-01-21','GCRS MAP10','High')];
-
 function labelDisplayedRows({
   from,
   to,
@@ -64,7 +58,6 @@ function labelDisplayedRows({
 }) {
   return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
 }
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -74,9 +67,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   }
   return 0;
 }
-
 type Order = 'asc' | 'desc';
-
 function getComparator<Key extends keyof any>(
   order: Order,
   orderBy: Key,
@@ -88,11 +79,6 @@ function getComparator<Key extends keyof any>(
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
@@ -104,14 +90,12 @@ function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) 
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 interface HeadCell {
   disablePadding: boolean;
   id: keyof Data;
   label: string;
   numeric: boolean;
 }
-
 const headCells: readonly HeadCell[] = [
   {
     id: 'name',
@@ -144,7 +128,6 @@ const headCells: readonly HeadCell[] = [
     label: 'LeveLOfSharing (g)',
   },
 ];
-
 interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
@@ -153,7 +136,6 @@ interface EnhancedTableProps {
   orderBy: string;
   rowCount: number;
 }
-
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
@@ -161,7 +143,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
-
   return (
     <thead>
       <tr>
@@ -230,15 +211,12 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     </thead>
   );
 }
-
 interface EnhancedTableToolbarProps {
   numSelected: number;
 }
-
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const { numSelected } = props;
-
-  return (
+return (
     <Box
       sx={{
         display: 'flex',
@@ -267,8 +245,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           Data
         </Typography>
       )}
-
-      {numSelected > 0 ? (
+{numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton size="sm" color="danger" variant="solid">
             <DeleteIcon />
@@ -281,14 +258,12 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     </Box>
   );
 }
-
 export default function TableSortAndSelection() {
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Data,
@@ -297,7 +272,6 @@ export default function TableSortAndSelection() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = rows.map((n) => n.description);
@@ -306,11 +280,9 @@ export default function TableSortAndSelection() {
     }
     setSelected([]);
   };
-
   const handleClick = (event: React.MouseEvent<unknown>, description: string) => {
     const selectedIndex = selected.indexOf(description);
     let newSelected: readonly string[] = [];
-
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, description);
     } else if (selectedIndex === 0) {
@@ -323,7 +295,6 @@ export default function TableSortAndSelection() {
         selected.slice(selectedIndex + 1),
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -331,10 +302,7 @@ export default function TableSortAndSelection() {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: any, newValue: number | null) => {
-    setRowsPerPage(parseInt(newValue!.toString(), 10));
-    setPage(0);
-  };
+
 
   const getLabelDisplayedRowsTo = () => {
     if (rows.length === -1) {

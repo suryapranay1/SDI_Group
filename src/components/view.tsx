@@ -34,12 +34,10 @@ export default function AppsMenu() {
         }}
       >
         <Link to='/list'>
-        
         <MenuItem orientation="vertical">
           <ListItemDecorator>
             <TocIcon />
           </ListItemDecorator>
-
           List
         </MenuItem>
         </Link>
