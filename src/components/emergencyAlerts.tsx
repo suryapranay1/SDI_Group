@@ -17,6 +17,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
+import { Link, Route } from "react-router-dom";
 
 interface EmergencyAlert {
   date: string;
@@ -45,6 +46,12 @@ export default function EmergencyAlerts() {
     formState: { errors },
   } = useForm<EmergencyAlert>({
     resolver: yupResolver(validationSchema),
+  });
+  const CustomTabs = styled(Tab)({
+    fontWeight: "bold",
+    "&.Mui-selected": {
+      color: "#458844ba",
+    },
   });
 
   const CustomTab = styled(Box)(({ theme }) => ({
@@ -84,9 +91,9 @@ export default function EmergencyAlerts() {
               backgroundColor: "white",
             }}
           >
-            <Tab disableIndicator color="success" variant="plain">
+            <CustomTabs disableIndicator color="success" variant="plain">
               Emergency Alerts
-            </Tab>
+            </CustomTabs>
           </TabList>
           <TabPanel
             value={0}
@@ -198,7 +205,6 @@ export default function EmergencyAlerts() {
                 </Box>
               )}
               <Box sx={{ display: "flex", justifyContent: "center" }}>
-                {submit && (
                   <Button
                     variant="outlined"
                     color="success"
@@ -209,7 +215,7 @@ export default function EmergencyAlerts() {
                   >
                     Submit
                   </Button>
-                )}
+                  
               </Box>
             </form>
           </TabPanel>

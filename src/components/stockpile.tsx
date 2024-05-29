@@ -18,6 +18,7 @@ import * as Yup from "yup";
 import { Typography } from "@mui/material";
 import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
 
+
 interface StockPileLocationInputs {
   title: string;
   date: string;
@@ -60,11 +61,8 @@ const validationSchema: Yup.ObjectSchema<StockPileLocationInputs> =
   });
 
 export default function StockPile() {
-  const [horizontalValue, setHorizontalValue] = React.useState(0);
+
   const [submit, updateSubmit] = React.useState(true);
-
-
-  
 
   const {
     register,
@@ -80,14 +78,6 @@ export default function StockPile() {
   const onSubmit = (data: StockPileLocationInputs) => {
     console.log(data);
     updateSubmit(false);
-  };
-
-  const handleNext = () => {
-    if (horizontalValue < 1) {
-      setHorizontalValue((prev) => prev + 1);
-    } else {
-      updateSubmit(true);
-    }
   };
 
   const CustomTabs = styled(Tab)({
@@ -118,7 +108,7 @@ export default function StockPile() {
       <Box sx={{ width: "55%" }}>
         <Tabs
           aria-label="Basic tabs"
-          value={horizontalValue}
+
           sx={{ backgroundColor: "white" }}
         >
           <TabList
@@ -128,9 +118,9 @@ export default function StockPile() {
               backgroundColor: "white",
             }}
           >
-            <Tab disableIndicator color="success" variant="plain">
+            <CustomTabs disableIndicator color="success" variant="plain">
               Stockpile Location
-            </Tab>
+            </CustomTabs>
           </TabList>
           <TabPanel
             value={0}
@@ -214,15 +204,14 @@ export default function StockPile() {
                         <Input
                           sx={{ mr: 4 }}
                           placeholder="Latitude"
+                          type='number'
                           {...register("locationLatitude")}
                           onChange={(e) => {
                             e.preventDefault();
                           }}
                         />
                         {errors.locationLatitude && (
-                          <Box
-                            sx={{ display: "flex", mt: "0.1em", mb: "1em" }}
-                          >
+                          <Box sx={{ display: "flex", mt: "0.1em", mb: "1em" }}>
                             <ErrorOutlineOutlined
                               sx={{ marginRight: "0.2em", fontSize: "1em" }}
                             />
@@ -239,15 +228,14 @@ export default function StockPile() {
                       <Box sx={{ display: "flex", flexDirection: "column" }}>
                         <Input
                           placeholder="Longitude"
+                          type='number'
                           {...register("locationLongitude")}
                           onChange={(e) => {
                             e.preventDefault();
                           }}
                         />
                         {errors.locationLongitude && (
-                          <Box
-                            sx={{ display: "flex", mt: "0.1em", mb: "1em" }}
-                          >
+                          <Box sx={{ display: "flex", mt: "0.1em", mb: "1em" }}>
                             <ErrorOutlineOutlined
                               sx={{ marginRight: "0.2em", fontSize: "1em" }}
                             />
@@ -347,10 +335,16 @@ export default function StockPile() {
                         e.preventDefault();
                       }}
                     />
-                    
                   </CustomTab>
                   {errors.name && (
-                    <Box sx={{ display: "flex", mt: "0.1em", mb: "1em",ml:'10em' }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        mt: "0.1em",
+                        mb: "1em",
+                        ml: "10em",
+                      }}
+                    >
                       <ErrorOutlineOutlined
                         sx={{ marginRight: "0.2em", fontSize: "1em" }}
                       />
@@ -379,7 +373,14 @@ export default function StockPile() {
                     />
                   </CustomTab>
                   {errors.units && (
-                    <Box sx={{ display: "flex", mt: "0.1em", mb: "1em",ml:'10em' }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        mt: "0.1em",
+                        mb: "1em",
+                        ml: "10em",
+                      }}
+                    >
                       <ErrorOutlineOutlined
                         sx={{ marginRight: "0.2em", fontSize: "1em" }}
                       />
@@ -390,12 +391,15 @@ export default function StockPile() {
                   )}
                 </Box>
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "center", ml: "20em" }}>
-                {submit && (
+              <Box
+                sx={{ display: "flex", justifyContent: "center", ml: "20em" }}
+              >
+
+      
                   <Button variant="outlined" color="success" type="submit">
                     Submit
                   </Button>
-                )}
+              
               </Box>
             </form>
           </TabPanel>

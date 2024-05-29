@@ -24,11 +24,12 @@ import AccordionSummary, {
   accordionSummaryClasses,
 } from '@mui/joy/AccordionSummary';
 import { Button } from '@mui/joy';
-import TabsBasic from "./forms";
+
 import TabsBasic1 from "./forms1";
 import TabsBasic3 from "./forms3";
 import TabsBasic2 from "./forms2";
 import Valid from "./valid";
+import TabsBasic from "./IncidentInfo";
 interface ListItem {
   key: string;
   value: string;

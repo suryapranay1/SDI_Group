@@ -16,6 +16,7 @@ import {
   styled,
 } from "@mui/joy";
 import { Typography } from "@mui/material";
+import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
 
 interface AgencyforHydro1 {
   realWorld: {
@@ -39,17 +40,17 @@ interface AgencyforHydro2 {
 const realWorldSchema: Yup.ObjectSchema<AgencyforHydro1> = Yup.object().shape({
   realWorld: Yup.object().shape({
     date: Yup.string().required("Date is required"),
-    airTemp: Yup.number().nullable().required("Air temperature is required"),
+    airTemp: Yup.number().nullable().required().typeError("enter valid air temperature"),
     precepitationDay: Yup.number()
       .nullable()
-      .required("Precipitation during the day is required"),
+      .required().typeError("enter valid number"),
     precepitationNight: Yup.number()
       .nullable()
-      .required("Precipitation at night is required"),
+      .required().typeError("enter valid number"),
     naturalFactor: Yup.number()
       .nullable()
-      .required("Natural factor is required"),
-    snowHeight: Yup.number().nullable().required("Snow height is required"),
+      .required().typeError('enter valid factor'),
+    snowHeight: Yup.number().nullable().required().typeError("enter valid snow height"),
   }),
 });
 
@@ -60,13 +61,13 @@ const weatherForecastSchema: Yup.ObjectSchema<AgencyforHydro2> =
       location: Yup.string().required("Location is required"),
       tempAtNight: Yup.number()
         .nullable()
-        .required("Temperature at night is required"),
+        .required().typeError('enter valid temperature at night'),
       tempAtDay: Yup.number()
         .nullable()
-        .required("Temperature during the day is required"),
+        .required().typeError("enter valid air temperature at day"),
       windDirecetion: Yup.number()
         .nullable()
-        .required("Wind direction is required"),
+        .required().typeError('enter valid number'),
     }),
   });
 
@@ -198,12 +199,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register1("realWorld.date")}
               />
-              {errors1.realWorld?.date && (
-                <Typography color="error">
-                  {errors1.realWorld.date.message}
-                </Typography>
-              )}
             </CustomTab>
+              {errors1.realWorld?.date && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors1.realWorld.date.message}
+                  </Typography>
+                  </Box>
+                  )}
+               
             <CustomTab>
               <FormLabel htmlFor="custom-air-temperature">
                 Air temperature<br></br>(in degree celcius)(at night)
@@ -214,12 +221,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register1("realWorld.airTemp")}
               />
-              {errors1.realWorld?.airTemp && (
-                <Typography color="error">
-                  {errors1.realWorld.airTemp.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors1.realWorld?.airTemp && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors1.realWorld.airTemp.message}
+                  </Typography>
+                  </Box>
+                  )}
             <CustomTab>
               <FormLabel htmlFor="custom-precipitation-day">
                 Precipitation<br></br>(mm)(During the day)
@@ -230,12 +243,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register1("realWorld.precepitationDay")}
               />
-              {errors1.realWorld?.precepitationDay && (
-                <Typography color="error">
-                  {errors1.realWorld.precepitationDay.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors1.realWorld?.precepitationDay && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors1.realWorld.precepitationDay.message}
+                  </Typography>
+                  </Box>
+                  )}
             <CustomTab>
               <FormLabel htmlFor="custom-precipitation-night">
                 Precipitation<br></br>(mm)(at night)
@@ -246,12 +265,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register1("realWorld.precepitationNight")}
               />
-              {errors1.realWorld?.precepitationNight && (
-                <Typography color="error">
-                  {errors1.realWorld.precepitationNight.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+            {errors1.realWorld?.precepitationNight && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors1.realWorld.precepitationNight.message}
+                  </Typography>
+                  </Box>
+                  )}
             <CustomTab>
               <FormLabel htmlFor="custom-naturalfactor-night">
                 Natural Factor<br></br>(At night)
@@ -262,12 +287,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register1("realWorld.naturalFactor")}
               />
-              {errors1.realWorld?.naturalFactor && (
-                <Typography color="error">
+              
+            </CustomTab>
+          {errors1.realWorld?.naturalFactor && (
+                <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                <ErrorOutlineOutlined
+                  sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                />
+                <Typography color="error" sx={{ fontSize: "0.8em" }}>
                   {errors1.realWorld.naturalFactor.message}
                 </Typography>
-              )}
-            </CustomTab>
+                </Box>
+                )}
             <CustomTab>
               <FormLabel htmlFor="custom-snow-Height">
                 Snow Height(cm)
@@ -278,12 +309,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register1("realWorld.snowHeight")}
               />
-              {errors1.realWorld?.snowHeight && (
-                <Typography color="error">
-                  {errors1.realWorld.snowHeight.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors1.realWorld?.snowHeight && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors1.realWorld.snowHeight.message}
+                  </Typography>
+                  </Box>
+                  )}
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button variant="outlined" type="submit" color="success">
                 Save&Next
@@ -395,12 +432,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register2("weatherForecast.location")}
               />
-              {errors2.weatherForecast?.location && (
-                <Typography color="error">
-                  {errors2.weatherForecast.location.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors2.weatherForecast?.location && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors2.weatherForecast.location.message}
+                  </Typography>
+                  </Box>
+                  )}
             <CustomTab>
               <FormLabel htmlFor="custom-at-night">
                 At night(in degree celcius)
@@ -411,12 +454,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register2("weatherForecast.tempAtNight")}
               />
-              {errors2.weatherForecast?.tempAtNight && (
-                <Typography color="error">
-                  {errors2.weatherForecast.tempAtNight.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors2.weatherForecast?.tempAtNight && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors2.weatherForecast.tempAtNight.message}
+                  </Typography>
+                  </Box>
+                  )}
             <CustomTab>
               <FormLabel htmlFor="custom-during-the-day">
                 During the day(in degree celcius)
@@ -427,12 +476,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register2("weatherForecast.tempAtDay")}
               />
-              {errors2.weatherForecast?.tempAtDay && (
-                <Typography color="error">
-                  {errors2.weatherForecast.tempAtDay.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors2.weatherForecast?.tempAtDay && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors2.weatherForecast.tempAtDay.message}
+                  </Typography>
+                  </Box>
+                  )}
             <CustomTab>
               <FormLabel htmlFor="custom-wind-direction">
                 Wind Direction
@@ -443,12 +498,18 @@ export default function Valid() {
                 placeholder="Type in here…"
                 {...register2("weatherForecast.windDirecetion")}
               />
-              {errors2.weatherForecast?.windDirecetion && (
-                <Typography color="error">
-                  {errors2.weatherForecast.windDirecetion.message}
-                </Typography>
-              )}
+              
             </CustomTab>
+              {errors2.weatherForecast?.windDirecetion && (
+                  <Box sx={{ display: "flex",ml:'16em',mt:'0.1em',mb:'1em'}}>
+                  <ErrorOutlineOutlined
+                    sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                  />
+                  <Typography color="error" sx={{ fontSize: "0.8em" }}>
+                    {errors2.weatherForecast.windDirecetion.message}
+                  </Typography>
+                  </Box>
+                  )}
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <Button variant="outlined" type="submit" color="success">
                 Save&Next

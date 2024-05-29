@@ -29,7 +29,9 @@ import {
 } from "@mui/joy";
 import { Path } from "react-hook-form";
 import FileUploadSharpIcon from "@mui/icons-material/FileUploadSharp";
-import { BackupOutlined } from "@mui/icons-material";
+import { ArrowLeft, BackupOutlined } from "@mui/icons-material";
+import EmergencyAlerts from "./emergencyAlerts";
+import StockPile from "./stockpile";
 
 interface MainInfo {
 
@@ -38,7 +40,8 @@ interface MainInfo {
   endDate: string;
   duration: number | null;
   typeOfHazard: string;
-  location: string;
+  locationLatitude: number|null;
+  locationLongitude: number|null;
   region: string;
   harzardLevel: number | null;
   economicLoss: number | null;
@@ -436,7 +439,8 @@ const mainInfoShema: Yup.ObjectSchema<MainInfo> = Yup.object().shape({
     endDate: Yup.string().required("End Date is required"),
     duration: Yup.number().nullable().required().typeError('enter a valid duration'),
     typeOfHazard: Yup.string().required("Type Of Hazard is required"),
-    location: Yup.string().required("Location is required"),
+    locationLatitude: Yup.number().required().typeError('Enter valid latitude'),
+    locationLongitude: Yup.number().required().typeError('Enter valid longitude'),
     region: Yup.string().required("Region is required"),
     harzardLevel: Yup.number().nullable().required().typeError('enter valid level'),
     economicLoss: Yup.number().nullable().required().typeError('enter a valid number'),
@@ -1040,26 +1044,20 @@ export default function TabsBasic() {
                           </Box>
                         )}
                         <CustomTab>
-                          <FormLabel htmlFor="custom-input-location">
-                            Location
-                          </FormLabel>
-                          <Input
-                            {...register1("location")}
-                            placeholder="Type in here…"
-                            onChange={(e) => {
-                              e.preventDefault();
-                            }}
-                          />
-                        </CustomTab>
-                        {errors1.location && (
-                          <Box
-                            sx={{
-                              display: "flex",
-                              mt: "0.1em",
-                              mb: "1em",
-                              ml: "10em",
-                            }}
-                          >
+                    <FormLabel htmlFor="location">Location</FormLabel>
+                    <Box display={"flex"}>
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Input
+                          sx={{ mr: 4 }}
+                          placeholder="Latitude"
+                          type="number"
+                          {...register1("locationLatitude")}
+                          onChange={(e) => {
+                            e.preventDefault();
+                          }}
+                        />
+                        {errors1.locationLatitude && (
+                          <Box sx={{ display: "flex", mt: "0.1em", mb: "1em" }}>
                             <ErrorOutlineOutlined
                               sx={{ marginRight: "0.2em", fontSize: "1em" }}
                             />
@@ -1067,10 +1065,38 @@ export default function TabsBasic() {
                               color="error"
                               sx={{ fontSize: "0.8em" }}
                             >
-                              {errors1.location.message}
+                              {errors1.locationLatitude.message}
                             </Typography>
                           </Box>
                         )}
+                      </Box>
+
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Input
+                          placeholder="Longitude"
+                          type="number"
+                          {...register1("locationLongitude")}
+                          onChange={(e) => {
+                            e.preventDefault();
+                          }}
+                        />
+                        {errors1.locationLongitude && (
+                          <Box sx={{ display: "flex", mt: "0.1em", mb: "1em" }}>
+                            <ErrorOutlineOutlined
+                              sx={{ marginRight: "0.2em", fontSize: "1em" }}
+                            />
+                            <Typography
+                              color="error"
+                              sx={{ fontSize: "0.8em" }}
+                            >
+                              {errors1.locationLongitude.message}
+                            </Typography>
+                          </Box>
+                        )}
+                      </Box>
+                    </Box>
+                  </CustomTab>
+                        
                         <CustomTab>
                           <FormLabel htmlFor="custom-input-region">
                             Region
@@ -1184,7 +1210,7 @@ export default function TabsBasic() {
                       </IconButton>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
+                      sx={{ display: "flex", justifyContent: "space-around" }}
                     >
                       <Button
                         variant="solid"
@@ -2066,7 +2092,37 @@ export default function TabsBasic() {
           </Box>
         </>
       )}
-      
+      {emergencyAlerts&&(<>
+        <Button
+        variant="outlined"
+        color="success"
+        onClick={() => {
+          Updateaccord(true);
+          UpdateEmergency(false);
+        }}
+        sx={{ alignSelf: "flex-start" }}
+      >
+        <ArrowLeft/>
+      </Button>
+        <EmergencyAlerts/>
+      </>
+      )}
+      {stockpileLocation&&(
+        <>
+         <Button
+        variant="outlined"
+        color="success"
+        onClick={() => {
+          Updateaccord(true);
+          Updatestockpile(false);
+        }}
+        sx={{ alignSelf: "flex-start" }}
+      >
+        <ArrowLeft/>
+      </Button>
+        <StockPile/>
+        </>
+      )}
     </>
   );
 }
